@@ -16,7 +16,25 @@ class Question(models.Model):
 
     def __str__(self):
         return f"{self.number}. {self.question}"
-    
+class UserProfile(models.Model):
+    GENDER_CHOICES = [
+        ('M', '男'),
+        ('F', '女'),
+        ('O', '其他'),
+    ]
+
+    gender = models.CharField(max_length=1, choices=GENDER_CHOICES)
+    phone = models.CharField(max_length=15)
+
+    def __str__(self):
+        return f"{self.get_gender_display()} - {self.phone}"
+
+class Post(models.Model):
+    title = models.CharField(max_length=100)
+    content = models.TextField()
+
+    def __str__(self):
+        return self.title
 # class Post1(models.Model):
 #     number = models.PositiveIntegerField()
 #     title = models.CharField(max_length=100)
