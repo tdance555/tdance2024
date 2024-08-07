@@ -1,0 +1,103 @@
+<!-- @Author: YI-SYUAN -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AR遊戲集點</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-image: url('https://github.com/anny114/myweb2022/blob/gh-pages/img/BG1.png?raw=true'); /* 替換為你的背景圖片 URL */
+            background-size: cover; /* 確保圖片覆蓋整個背景 */
+            background-position: center center; /* 確保圖片居中 */
+            background-repeat: no-repeat; /* 防止圖片重覆 */
+        }
+
+        .container {
+            max-width: 100%;
+            margin: 0 auto;
+            padding: 20px;
+            box-sizing: border-box;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh; /* 確保容器至少占滿整個視口高度 */
+            /*background: rgba(255, 255, 255, 0.8); *//* 半透明白色背景 */
+        }
+
+        .content {
+            /*background-color: #000000;*/
+            padding: 20px;
+            border-radius: 5px;
+            text-align: center;
+            width: 100%;
+            max-width: 500px;
+            padding-top: 50px;
+            /*box-shadow: 0 4px 8px rgba(0,0,0,0.1);  輕微陰影效果 */
+        }
+
+        button{
+            background-color: #f08c22; /* Green */
+            border: none;
+            color: white;
+            padding: 20px 42px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            border-radius:10px;
+            border: 2px solid white;
+        }
+
+        @media (min-width: 320px) and (max-width: 480px) {
+            .container {
+                padding: 10px;
+            }
+
+            .content {
+                font-size: 14px;
+            }
+        }
+
+        @media (min-width: 481px) and (max-width: 767px) {
+            .container {
+                padding: 15px;
+            }
+
+            .content {
+                font-size: 16px;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+
+            .content {
+                font-size: 18px;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="content">
+            <!-- <h1>Welcome to the Responsive Page</h1> -->
+            <!-- <p>This page is designed to fit within mobile device dimensions.</p> -->
+            <button onclick="redirectToPage()" class="btn">開始旅行</button>
+        </div>
+    </div>
+
+    <script>
+        function redirectToPage() {
+            window.location.href = "{% url 'user_profile' %}";
+        }
+    </script>
+</body>
+</html>

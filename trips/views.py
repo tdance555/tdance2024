@@ -8,6 +8,9 @@ from .forms import UserProfileForm
 def hello_world(request):
     return HttpResponse("Hello World!")
 
+def index(request):
+    return render(request, 'index.html')
+
 class PostListCreate(generics.ListCreateAPIView):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
@@ -17,7 +20,7 @@ def user_profile(request):
         form = UserProfileForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('profile_success')  # 成功后重定向到成功页面
+            return redirect('profile_success')  # 成功後重定向到成功頁面
     else:
         form = UserProfileForm()
 
