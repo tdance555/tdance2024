@@ -16,6 +16,7 @@ class Question(models.Model):
 
     def __str__(self):
         return f"{self.number}. {self.question}"
+    
 class UserProfile(models.Model):
     GENDER_CHOICES = [
         ('M', '男'),
