@@ -8,6 +8,7 @@ urlpatterns = [
     path('profile/', views.user_profile, name='user_profile'),
     path('profile/<int:number>/', views.profile_success, name='profile_success'),
     # 其他路由配置
+    path('templates/ar_scan01/', views.ar_scan01, name='ar_scan01'),
 
 ]
 
