@@ -6,11 +6,12 @@ urlpatterns = [
     path('', views.index, name='index'),
     path('posts/', PostListCreate.as_view(), name='post-list-create'),
     path('profile/', views.user_profile, name='user_profile'),
-    path('profile/success/', views.profile_success, name='profile_success'),
-    path('profile/', views.user_profile, name='user_profile'),
+    path('profile/<int:number>/', views.profile_success, name='profile_success'),
+    # 其他路由配置
+
 ]
 
-#,sdfghjkjnh;gfdjhgd
+
 
 
 

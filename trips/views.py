@@ -1,7 +1,7 @@
 from rest_framework import generics
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
-from .models import Post
+from .models import Post , Question
 from .serializers import PostSerializer
 from .forms import UserProfileForm
 
@@ -26,5 +26,7 @@ def user_profile(request):
 
     return render(request, 'user_profile.html', {'form': form})
 
-def profile_success(request):
-    return render(request, 'profile_success.html')
+def profile_success(request,number):
+    question = get_object_or_404(Question,  number=number)
+
+    return render(request, 'profile_success.html', {'question': question})
