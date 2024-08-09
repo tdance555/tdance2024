@@ -30,17 +30,26 @@
                 align-items: center;
                 justify-content: center;
                 height: 100vh; /* 占滿視窗高度 */
-                padding: 20px;
+                padding: 35px;
                 box-sizing: border-box;
+                max-width: 600px; /* 限制容器的最大寬度 */
+                margin: 0 auto; /* 居中對齊容器 */
             }
 
             h1 {
-                margin-bottom: 20px; /* 調整標題與選項之間的距離 */
-                font-size: 20px; /* 調整標題字體大小 */
-                line-height: 1.5; /* 增加標題行高 */
+                line-height: 1.5;
+                color: orangered;
+                font-family: 'Microsoft YaHei';
+                margin: 0 0 60px 0;
+                font-size: 20px;
+                max-width: 70%;
             }
 
             .gender-buttons {
+                background-color: cadetblue;
+                font-weight: 700;
+                letter-spacing: 6px;
+                color: snow;
                 display: block;
                 padding: 10px;
                 margin-top: 10px; /* 調整選項與上方內容的距離 */
@@ -48,17 +57,16 @@
                 text-align: center;
                 border: 1px solid #ccc; /* 按鈕邊框顏色 */
                 border-radius: 5px;
-                background-color: #f0f0f0; /* 按鈕默認背景顏色 */
-                color: #333; /* 按鈕默認文字顏色 */
-                font-size: 16px;
+                font-size: 18px;
                 text-decoration: none;
                 outline: none;
                 width: 80%; /* 調整按鈕寬度 */
                 box-sizing: border-box;
+                font-family: 'Microsoft YaHei';
             }
 
             .gender-buttons:hover {
-                background-color: #ddd; /* 選項的懸停背景顏色 */
+                background-color: cadetblue; /* 選項的懸停背景顏色 */
             }
 
             .gender-buttons:last-child {
@@ -70,10 +78,11 @@
 <body>
     <div class="container">
         <h1>{{ question.question }}</h1>
-        <a href="#" class="gender-buttons">{{ question.choiceA }}</a>
-        <a href="#" class="gender-buttons">{{ question.choiceB }}</a>
-        <a href="#" class="gender-buttons">{{ question.choiceC }}</a>
-        <a href="#" class="gender-buttons">{{ question.choiceD }}</a>
+        <button class="gender-buttons">{{ question.choiceA }}</button>
+        <button class="gender-buttons">{{ question.choiceB }}</button>
+        <button class="gender-buttons">{{ question.choiceC }}</button>
+        <button class="gender-buttons">{{ question.choiceD }}</button>
     </div>
 </body>
 </html>
+
