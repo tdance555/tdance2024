@@ -20,8 +20,8 @@
                 margin: 0;
                 padding: 0;
                 text-align: center; /* 所有文字置中 */
-                background-image: url('https://github.com/anny114/myweb2022/blob/gh-pages/img/BG1.png?raw=true'); /* 背景圖像路徑 */
-                background-size: cover; /* 使背景圖像覆蓋整個背景 */
+                background-image: url('https://github.com/tdance555/tdance2024/blob/main/media/vendor_icons/WebAR_Background.png?raw=true');  /* 背景圖像路徑 */
+                background-size: 100% 100%; /* 使背景圖像覆蓋整個背景 */
                 background-position: center center; /* 將背景圖像置中 */
                 background-repeat: no-repeat; /* 防止背景圖像重複 */
             }
@@ -133,7 +133,8 @@
             // 初始化intl-tel-input
             var input = document.querySelector("#phone");
             var iti = window.intlTelInput(input, {
-                utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js"
+                utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
+                initialCountry: "TW" // 设置默认国家为台湾
             });
 
             // 處理性別按鈕點擊事件
@@ -161,8 +162,10 @@
                     hiddenPhoneInput.setAttribute("name", "international_phone");
                     hiddenPhoneInput.setAttribute("value", iti.getNumber());
                     document.getElementById("user-form").appendChild(hiddenPhoneInput);
-                }
 
+                // 設置Cookie保存手機號碼
+                document.cookie = "phone=" + iti.getNumber() + "; path=/; max-age=" + (60 * 60 * 24 * 30); // 30天的過期時間
+                }
                 // 檢查是否選擇了性別
                 if (document.getElementById('id_gender').value === '') {
                     alert("請選擇性別");
