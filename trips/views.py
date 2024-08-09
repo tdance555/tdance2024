@@ -30,3 +30,6 @@ def profile_success(request,number):
     question = get_object_or_404(Question,  number=number)
 
     return render(request, 'profile_success.html', {'question': question})
+
+def ar_scan01(request):
+    return render(request, 'ar_scan01.html')
