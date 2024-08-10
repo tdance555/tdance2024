@@ -4,6 +4,9 @@ from django.http import HttpResponse
 from .models import Post , Question
 from .serializers import PostSerializer
 from .forms import UserProfileForm
+from django.contrib.auth.decorators import login_required
+from .models import GameProgress
+from django.contrib import messages
 
 def hello_world(request):
     return HttpResponse("Hello World!")
@@ -16,17 +19,25 @@ class PostListCreate(generics.ListCreateAPIView):
     serializer_class = PostSerializer
 # Create your views here.
 
+@login_required
 def user_profile(request):
     if request.method == 'POST':
+        phone = request.POST.get('international_phone')
+        gender = request.POST.get('gender')
         form = UserProfileForm(request.POST)
-        if form.is_valid():
+        if phone:  # 确保 phone 字段有值
+            # 获取或创建 GameProgress 实例
+            game_progress, created = GameProgress.objects.get_or_create(phone=phone)
+            game_progress.current_stage = 'Initial Stage'  # 根据需要设置初始阶段
+            game_progress.history = f"Phone: {phone}, Gender: {gender}"
+            game_progress.save()
             form.save()
-            # 表单成功后重定向到 manual 页面
-            return redirect('manual')
-    else:
-        form = UserProfileForm()
+            messages.success(request, '信息已保存。')
+            return redirect('manual')  # 替换为你希望重定向的 URL
+        else:
+            form = UserProfileForm()
 
-    return render(request, 'user_profile.html', {'form': form})
+    return render(request, 'user_profile.html')
 
 
 def profile_success(request, number):

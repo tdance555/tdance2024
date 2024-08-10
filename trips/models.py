@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.contrib.auth.models import User
 # Create your models here.
 class Question(models.Model):
     number = models.PositiveIntegerField(unique=True)
@@ -16,7 +16,7 @@ class Question(models.Model):
 
     def __str__(self):
         return f"{self.number}. {self.question}"
-    
+
 class UserProfile(models.Model):
     GENDER_CHOICES = [
         ('M', '男'),
@@ -36,11 +36,11 @@ class Post(models.Model):
 
     def __str__(self):
         return self.title
-# class Post1(models.Model):
-#     number = models.PositiveIntegerField()
-#     title = models.CharField(max_length=100)
-#     content = models.TextField(blank=True)
-#     image = models.ImageField(upload_to='questions/', blank=True, null=True)
 
-#     def __str__(self):
-#         return f"{self.number}. {self.title}"
+class GameProgress(models.Model):
+    phone = models.CharField(max_length=15, default='UNKNOWN')  # 设置默认值
+    current_stage = models.CharField(max_length=100)
+    history = models.TextField()
+
+    def __str__(self):
+        return f"{self.phone} - {self.current_stage}"
