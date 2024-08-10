@@ -1,5 +1,3 @@
-<!-- @Author: YI-SYUAN -->
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -163,17 +161,19 @@
                     hiddenPhoneInput.setAttribute("value", iti.getNumber());
                     document.getElementById("user-form").appendChild(hiddenPhoneInput);
 
-                // 設置Cookie保存手機號碼
-                document.cookie = "phone=" + iti.getNumber() + "; path=/; max-age=" + (60 * 60 * 24 * 30); // 30天的過期時間
+                    // 設置Cookie保存手機號碼
+                    document.cookie = "phone=" + iti.getNumber() + "; path=/; max-age=" + (60 * 60 * 24 * 30); // 30天的過期時間
                 }
                 // 檢查是否選擇了性別
                 if (document.getElementById('id_gender').value === '') {
                     alert("請選擇性別");
                     event.preventDefault(); // 阻止表單提交
+                } else {
+                    // 若一切正確，進行重定向
+                    window.location.href = "{% url 'manual' %}";
                 }
             });
         });
     </script>
 </body>
 </html>
-

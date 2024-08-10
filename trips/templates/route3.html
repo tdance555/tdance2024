@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>路線3</title>
+    <style>
+        /* 僅在手機上顯示 */
+        @media (min-width: 481px) {
+            body {
+                display: none;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                font-family: Arial, sans-serif;
+                margin: 0;
+                padding: 0;
+                text-align: center;
+                background-image: url('https://github.com/tdance555/tdance2024/blob/main/media/vendor_icons/WebAR_Background.png?raw=true'); /* 替換為你的背景圖片網址 */
+                background-size: cover;
+                background-position: center;
+                background-repeat: no-repeat;
+                height: 100vh; /* 背景覆盖整个页面 */
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column; /* 垂直排列图标 */
+            }
+
+            .icon-container {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr); /* 設定為兩列 */
+                gap: 10px; /* 圖示之間的間距 */
+                width: 100%;
+                max-width: 220px; /* 控制容器的最大寬度 */
+            }
+
+            .icon-container img {
+                width: 100px;
+                height: 100px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="icon-container">
+        <img src="https://github.com/tdance555/tdance2024/blob/main/media/vendor_icons/12.png?raw=true" alt="Icon 1">
+        <img src="https://github.com/tdance555/tdance2024/blob/main/media/vendor_icons/13.png?raw=true" alt="Icon 2">
+        <img src="https://github.com/tdance555/tdance2024/blob/main/media/vendor_icons/14.png?raw=true" alt="Icon 3">
+        <img src="https://github.com/tdance555/tdance2024/blob/main/media/vendor_icons/15.png?raw=true" alt="Icon 4">
+        <img src="https://github.com/tdance555/tdance2024/blob/main/media/vendor_icons/16.png?raw=true" alt="Icon 5">
+        <img src="https://github.com/tdance555/tdance2024/blob/main/media/vendor_icons/17.png?raw=true" alt="Icon 6">
+    </div>
+</body>
+</html>
