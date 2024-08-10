@@ -1,135 +1,63 @@
+<!-- @Author: YI-SYUAN -->
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>闖關問題</title>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <style>
-        /* 僅在手機上顯示 */
-        @media (min-width: 481px) {
-            body {
-                display: none;
-            }
-        }
+      /* 左上角的 back 按鈕 */
+      .back-button {
+        position: fixed;
+        top: 10px;
+        left: 10px;
+        width: 50px; /* 可以根據需求調整大小 */
+        height: 50px;
+        background-image: url('../img/back.png'); /* back 圖片的路徑 */
+        background-size: cover;
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+        z-index: 1000; /* 保證按鈕在其他元素之上 */
+      }
 
-        @media (max-width: 480px) {
-            body {
-                font-family: Arial, sans-serif;
-                margin: 0;
-                padding: 0;
-                text-align: center; /* 所有文字置中 */
-                /* background-image: url('https://github.com/tdance555/tdance2024/blob/main/media/vendor_icons/WebAR_Background.png?raw=true');  背景圖像路徑 */
-                background-size: 100% 100%; /* 使背景圖像覆蓋整個背景 */
-                background-position: center center; /* 將背景圖像置中 */
-                background-repeat: no-repeat; /* 防止背景圖像重複 */
-            }
-
-            .container {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
-                height: 100vh; /* 占滿視窗高度 */
-                padding: 35px;
-                box-sizing: border-box;
-                max-width: 600px; /* 限制容器的最大寬度 */
-                margin: 0 auto; /* 居中對齊容器 */
-            }
-
-            h1 {
-                line-height: 1.5;
-                color: orangered;
-                font-family: 'Microsoft YaHei';
-                margin: 0 0 60px 0;
-                font-size: 20px;
-                max-width: 70%;
-            }
-
-            .gender-buttons {
-                background-color: cadetblue;
-                font-weight: 700;
-                letter-spacing: 6px;
-                color: snow;
-                display: block;
-                padding: 10px;
-                margin-top: 10px; /* 調整選項與上方內容的距離 */
-                margin-bottom: 10px; /* 調整選項之間的距離 */
-                text-align: center;
-                border: 1px solid #ccc; /* 按鈕邊框顏色 */
-                border-radius: 5px;
-                font-size: 18px;
-                text-decoration: none;
-                outline: none;
-                width: 80%; /* 調整按鈕寬度 */
-                box-sizing: border-box;
-                font-family: 'Microsoft YaHei';
-
-            }
-
-            .gender-buttons:hover {
-                background-color: cadetblue; /* 選項的懸停背景顏色 */
-            }
-
-            .gender-buttons:last-child {
-                margin-bottom: 0; /* 最後一個選項不需要下邊距 */
-            }
-
-            /* 左上角的 back 按鈕 */
-            .back-button {
-                position: fixed;
-                top: 10px;
-                left: 10px;
-                width: 50px; /* 可以根據需求調整大小 */
-                height: 50px;
-                background-image: url('../img/back.png'); /* back 圖片的路徑 */
-                background-size: cover;
-                background-color: transparent;
-                border: none;
-                cursor: pointer;
-                z-index: 1000; /* 保證按鈕在其他元素之上 */
-            }
-
-            /* 添加一個實心白色方框並固定在螢幕中央 */
-            .center-box {
-                position: fixed;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-                width: 300px; /* 可以根據需求調整大小 */
-                height: 400px; /* 可以根據需求調整大小 */
-                background-color: white; /* 實心背景 */
-                /* border: 2px solid black; */
-                border-radius: 15px;
-                box-sizing: border-box;
-                display: none; /* 初始隱藏 */
-                padding: 20px;
-                text-align: center;
-            }
-            .question {
-                margin-bottom: 20px;
-                font-size: 18px;
-                font-weight: bold;
-            }
-            .option {
-                display: block;
-                margin: 10px 0;
-                padding: 10px;
-                font-size: 16px;
-                cursor: pointer;
-            }
-            .result {
-                display: none;
-                font-size: 18px;
-                font-weight: bold;
-            }
-            .result img {
-                max-width: 100%;
-                height: auto;
-            }
-        }
+      /* 添加一個實心白色方框並固定在螢幕中央 */
+      .center-box {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 300px; /* 可以根據需求調整大小 */
+        height: 400px; /* 可以根據需求調整大小 */
+        background-color: white; /* 實心背景 */
+        /* border: 2px solid black; */
+        border-radius: 15px;
+        box-sizing: border-box;
+        display: none; /* 初始隱藏 */
+        padding: 20px;
+        text-align: center;
+      }
+      .question {
+        margin-bottom: 20px;
+        font-size: 18px;
+        font-weight: bold;
+      }
+      .option {
+        display: block;
+        margin: 10px 0;
+        padding: 10px;
+        font-size: 16px;
+        cursor: pointer;
+      }
+      .result {
+        display: none;
+        font-size: 18px;
+        font-weight: bold;
+      }
+      .result img {
+        max-width: 100%;
+        height: auto;
+      }
     </style>
-</head>
-<script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
+    <script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
     <script>
       document.addEventListener('DOMContentLoaded', function() {
@@ -139,6 +67,7 @@
         const options = document.querySelectorAll('.option');
         const result = document.querySelector('.result');
         const scene = document.querySelector('a-scene');
+        const correctAnswer = "{{ question.answer }}";  // 正確答案從後端傳遞
 
         target.addEventListener('targetFound', () => {
           box.style.display = 'block';
@@ -156,7 +85,7 @@
 
         options.forEach(option => {
           option.addEventListener('click', () => {
-            const isCorrect = option.dataset.correct === 'true';
+            const isCorrect = option.dataset.choice === correctAnswer;
             question.style.display = 'none';
             options.forEach(opt => opt.style.display = 'none');
             result.style.display = 'block';
@@ -179,27 +108,29 @@
         window.location.href = "http://127.0.0.1:8000/trips/profile/";//解決CROS問題
       }
     </script>
-<body>
+  </head>
+  <body>
     <a-scene mindar-image="imageTargetSrc: ../mind/targets_03.mind; uiError: no; uiLoading: no; uiScanning: no;" color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false">
-        <a-assets>
-          <img id="card" src="../img/img_03.png" />
-          <a-asset-item id="avatarModel" src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.2.5/examples/image-tracking/assets/card-example/softmind/scene.gltf"></a-asset-item>
-        </a-assets>
-  
-        <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
-        <a-entity mindar-image-target="targetIndex: 0"></a-entity>
-    </a-scene>
+      <a-assets>
+        <img id="card" src="../img/img_03.png" />
+        <a-asset-item id="avatarModel" src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.2.5/examples/image-tracking/assets/card-example/softmind/scene.gltf"></a-asset-item>
+      </a-assets>
 
+      <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
+      <a-entity mindar-image-target="targetIndex: 0"></a-entity>
+    </a-scene>
+    
     <!-- 固定在螢幕左上角的 back 按鈕 -->
     <button class="back-button" onclick="BackToPagepoint()"></button>
-
-    <div class="container">
-        <h1>{{ question.question }}</h1>
-        <button class="gender-buttons">{{ question.choiceA }}</button>
-        <button class="gender-buttons">{{ question.choiceB }}</button>
-        <button class="gender-buttons">{{ question.choiceC }}</button>
-        <button class="gender-buttons">{{ question.choiceD }}</button>
+    
+    <!-- 固定在螢幕中央的實心白色方框 -->
+    <div class="center-box">
+      <div class="question">{{ question.question }}</div>
+      <button class="option" data-choice="A">A. {{ question.choiceA }}</button>
+      <button class="option" data-choice="B">B. {{ question.choiceB }}</button>
+      <button class="option" data-choice="C">C. {{ question.choiceC }}</button>
+      <button class="option" data-choice="D">D. {{ question.choiceD }}</button>
+      <div class="result"></div>
     </div>
-</body>
+  </body>
 </html>
-
