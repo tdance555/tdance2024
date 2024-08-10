@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>闖關問題</title>
+    <style>
+        /* 僅在手機上顯示 */
+        @media (min-width: 481px) {
+            body {
+                display: none;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                font-family: Arial, sans-serif;
+                margin: 0;
+                padding: 0;
+                text-align: center; /* 所有文字置中 */
+                /* background-image: url('https://github.com/tdance555/tdance2024/blob/main/media/vendor_icons/WebAR_Background.png?raw=true');  背景圖像路徑 */
+                background-size: 100% 100%; /* 使背景圖像覆蓋整個背景 */
+                background-position: center center; /* 將背景圖像置中 */
+                background-repeat: no-repeat; /* 防止背景圖像重複 */
+            }
+
+            .container {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                height: 100vh; /* 占滿視窗高度 */
+                padding: 35px;
+                box-sizing: border-box;
+                max-width: 600px; /* 限制容器的最大寬度 */
+                margin: 0 auto; /* 居中對齊容器 */
+            }
+
+            h1 {
+                line-height: 1.5;
+                color: orangered;
+                font-family: 'Microsoft YaHei';
+                margin: 0 0 60px 0;
+                font-size: 20px;
+                max-width: 70%;
+            }
+
+            .gender-buttons {
+                background-color: cadetblue;
+                font-weight: 700;
+                letter-spacing: 6px;
+                color: snow;
+                display: block;
+                padding: 10px;
+                margin-top: 10px; /* 調整選項與上方內容的距離 */
+                margin-bottom: 10px; /* 調整選項之間的距離 */
+                text-align: center;
+                border: 1px solid #ccc; /* 按鈕邊框顏色 */
+                border-radius: 5px;
+                font-size: 18px;
+                text-decoration: none;
+                outline: none;
+                width: 80%; /* 調整按鈕寬度 */
+                box-sizing: border-box;
+                font-family: 'Microsoft YaHei';
+
+            }
+
+            .gender-buttons:hover {
+                background-color: cadetblue; /* 選項的懸停背景顏色 */
+            }
+
+            .gender-buttons:last-child {
+                margin-bottom: 0; /* 最後一個選項不需要下邊距 */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>{{ question.question }}</h1>
+        <button class="gender-buttons">{{ question.choiceA }}</button>
+        <button class="gender-buttons">{{ question.choiceB }}</button>
+        <button class="gender-buttons">{{ question.choiceC }}</button>
+        <button class="gender-buttons">{{ question.choiceD }}</button>
+    </div>
+</body>
+</html>
+
