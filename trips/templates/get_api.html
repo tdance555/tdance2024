@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <style>
+        .back-button {
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            width: 50px;
+            height: 50px;
+            background-image: url('https://github.com/tdance555/tdance2024/blob/main/trips/img/back.png?raw=true');
+            background-size: cover;
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            z-index: 1000;
+        }
+  
+        .center-box {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 300px;
+            height: 400px;
+            background-color: white;
+            border-radius: 15px;
+            box-sizing: border-box;
+            display: none;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .question {
+            margin-bottom: 20px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .option {
+            display: block;
+            margin: 10px 0;
+            padding: 10px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .result {
+            display: none;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .result img {
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
+    <title>Document</title>
+    <script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
+</head>
+<body>
+    <button class="back-button" onclick="BackToPagepoint()"></button>
+
+    <a-scene 
+        mindar-image="imageTargetSrc: ../mind/targets_03.mind; uiError: no; uiLoading: no; uiScanning: no;" 
+        color-space="sRGB" 
+        renderer="colorManagement: true, physicallyCorrectLights" 
+        vr-mode-ui="enabled: false" 
+        device-orientation-permission-ui="enabled: false">
+        
+        <a-assets>
+            <img id="card" src="https://github.com/tdance555/tdance2024/blob/main/trips/img/img_03.png?raw=true" />
+            <a-asset-item id="avatarModel" src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.2.5/examples/image-tracking/assets/card-example/softmind/scene.gltf"></a-asset-item>
+        </a-assets>
+  
+        <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
+        <a-entity mindar-image-target="targetIndex: 0"></a-entity>
+    </a-scene>
+
+    <div class="center-box"></div>
+
+    <script>
+        $(document).ready(function() {
+            let targetFoundOnce = false;
+
+            var mindarEntity = document.querySelector('a-entity[mindar-image-target]');
+            mindarEntity.addEventListener('targetFound', function(event) {
+                if (!targetFoundOnce) {
+                    targetFoundOnce = true;
+
+                    $('.center-box').fadeIn();
+
+                    $.ajax({
+                        url: "http://127.0.0.1:8000/trips/api/question/1",
+                        type: "GET",
+                        dataType: "json",
+                        success: function(Question) {
+                            var correctAnswer = Question.answer;  // 正確答案的字母
+                            var content = `
+                                <div class="question">${Question.question}</div>
+                                <button class="option" data-choice="A">${Question.choiceA}</button>
+                                <button class="option" data-choice="B">${Question.choiceB}</button>
+                                <button class="option" data-choice="C">${Question.choiceC}</button>
+                                <button class="option" data-choice="D">${Question.choiceD}</button>
+                                <div class="result"></div>
+                            `;
+                            $('.center-box').html(content);
+
+                            // 為每個選項按鈕添加點擊事件
+                            $('.option').click(function() {
+                                var userChoice = $(this).data('choice');
+
+                                // 移除問題和選項按鈕
+                                $('.question, .option').remove();
+
+                                if (userChoice === correctAnswer) {
+                                    // 正確答案
+                                    $('.result').html('<p>恭喜通關</p><img src="path_to_success_image.png" alt="Success Image">');
+                                } else {
+                                    // 錯誤答案
+                                    $('.result').html('<p>挑戰失敗</p><img src="path_to_failure_image.png" alt="Failure Image">');
+                                }
+
+                                $('.result').fadeIn();
+                            });
+                        },
+                        error: function(xhr, status, error) {
+                            console.error('AJAX request failed:', error);
+                        }
+                    });
+
+                    mindarEntity.removeEventListener('targetFound', arguments.callee);
+                }
+            });
+        });
+        function BackToPagepoint() {
+            window.location.href = "http://127.0.0.1:8000/trips/profile/";//解決CROS問題
+        }
+    </script>
+</body>
+</html>

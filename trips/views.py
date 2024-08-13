@@ -72,9 +72,12 @@ def user_profile(request):
     return render(request, 'user_profile.html', {'form': form})
 
 
-def profile_success(request, number):
-    question = get_object_or_404(Question, number=number)
-    return render(request, 'profile_success.html', {'question': question})
+# def profile_success(request, number):
+#     question = get_object_or_404(Question, number=number)
+#     return render(request, 'profile_success.html', {'question': question})
+
+def get_api(request):
+    return render(request, 'get_api.html')
 
 
 def ar_scan01(request):
