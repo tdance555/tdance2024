@@ -1,6 +1,21 @@
 from django.db import models
 
 # Create your models here.
+def default_content():
+    return {
+        "1": {
+            "status": "null", # null, pass, fail
+            "user_answer": "",
+            "correct_answer": "",
+        },
+        "2": {
+            "status": "null",
+            "user_answer": "",
+            "correct_answer": "",
+        },
+    }
+
+
 class Question(models.Model):
     number = models.PositiveIntegerField(unique=True)
     batch = models.CharField(max_length=100)  # 梯次 第一天,第二天
@@ -32,7 +47,7 @@ class UserProfile(models.Model):
 
 class Post(models.Model):
     user = models.OneToOneField(UserProfile, on_delete=models.SET_NULL, related_name='post', null=True, blank=True)
-    content = models.JSONField(default=dict)
+    content = models.JSONField(default=default_content)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
