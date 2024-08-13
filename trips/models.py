@@ -31,12 +31,10 @@ class UserProfile(models.Model):
         return f"{self.get_gender_display()} - {self.phone}"
 
 class Post(models.Model):
-    #user = models.OneToOneField(UserProfile, on_delete=models.SET_NULL, related_name='post', null=True, blank=True)
-    #content = models.JSONField(default=dict)
-    #created_at = models.DateTimeField(auto_now_add=True)
-    #updated_at = models.DateTimeField(auto_now=True)
-    title = models.CharField(max_length=100)
-    content = models.TextField()
+    user = models.OneToOneField(UserProfile, on_delete=models.SET_NULL, related_name='post', null=True, blank=True)
+    content = models.JSONField(default=dict)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return f"Post by {self.user.phone} at {self.created_at}"
