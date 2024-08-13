@@ -16,7 +16,7 @@ class Question(models.Model):
 
     def __str__(self):
         return f"{self.number}. {self.question}"
-    
+
 class UserProfile(models.Model):
     GENDER_CHOICES = [
         ('M', '男'),
@@ -24,18 +24,22 @@ class UserProfile(models.Model):
         ('O', '其他'),
     ]
 
+    phone = models.CharField(max_length=15, primary_key=True)
     gender = models.CharField(max_length=1, choices=GENDER_CHOICES)
-    phone = models.CharField(max_length=15)
 
     def __str__(self):
         return f"{self.get_gender_display()} - {self.phone}"
 
 class Post(models.Model):
+    #user = models.OneToOneField(UserProfile, on_delete=models.SET_NULL, related_name='post', null=True, blank=True)
+    #content = models.JSONField(default=dict)
+    #created_at = models.DateTimeField(auto_now_add=True)
+    #updated_at = models.DateTimeField(auto_now=True)
     title = models.CharField(max_length=100)
     content = models.TextField()
 
     def __str__(self):
-        return self.title
+        return f"Post by {self.user.phone} at {self.created_at}"
 # class Post1(models.Model):
 #     number = models.PositiveIntegerField()
 #     title = models.CharField(max_length=100)
