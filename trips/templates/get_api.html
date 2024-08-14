@@ -85,8 +85,26 @@
     <div class="center-box"></div>
 
     <script>
+
+        // 函数：获取指定名称的 cookie 值
+        function getCookie(name) {
+            let nameEQ = name + "=";
+            let ca = document.cookie.split(';');
+            for (let i = 0; i < ca.length; i++) {
+                let c = ca[i];
+                while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+                if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+            }
+            return null;
+        }
+
         $(document).ready(function() {
             let targetFoundOnce = false;
+
+            // 从 cookie 中取出名为 'level' 的值，并命名为 num
+            let num = getCookie('level');
+            // console.log('The value of num is:', num);
+            // 你可以在这里根据 num 的值执行其他操作
 
             var mindarEntity = document.querySelector('a-entity[mindar-image-target]');
             mindarEntity.addEventListener('targetFound', function(event) {
@@ -95,8 +113,11 @@
 
                     $('.center-box').fadeIn();
 
+                    mainurl="http://127.0.0.1:8000/trips/api/question/";
+                    // num=1;
+
                     $.ajax({
-                        url: "http://127.0.0.1:8000/trips/api/question/1",
+                        url: mainurl+num,
                         type: "GET",
                         dataType: "json",
                         success: function(Question) {
