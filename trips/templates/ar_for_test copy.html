@@ -8,7 +8,10 @@
     <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
   </head>
   <body>
-    <a-scene mindar-image="imageTargetSrc: ../mind/targets_00.mind;" color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false">
+
+    <!-- <a-scene mindar-image="imageTargetSrc: ../mind/targets_00.mind; uiError: no; uiLoading: no; uiScanning: no;" color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false"> -->
+    <!-- <a-scene mindar-image="imageTargetSrc: /static/path/to/your/targets.mind; uiError: no; uiLoading: no; uiScanning: no;" color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false"> -->
+    <a-scene id="ar-scene" mindar-image="imageTargetSrc: ../mind/targets_00.mind; uiError: no; uiLoading: no; uiScanning: no;" color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false" embedded="true" style="display: none;">
       <a-assets>
         <img id="card1" src="../img/img_02.png" />
         <img id="card2" src="../img/img_03.png" />
@@ -130,5 +133,32 @@
         <a-plane color="blue" opaciy="0.5" position="0 0 0" height="0.552" width="1" rotation="0 0 0"></a-plane>
       </a-entity>
     </a-scene>
+    <script>
+      $(document).ready(function() {
+          var num = 4;  // 假设 num 的值
+
+          var arScene = document.getElementById('ar-scene');
+          var arTarget = document.getElementById('ar-target');
+
+          // 动态设置 targetIndex 来解锁特定的目标
+          arTarget.setAttribute('mindar-image-target', `targetIndex: ${num - 1}`);
+
+          // 显示并启用 A-Frame 渲染
+          arScene.style.display = 'block';
+
+          // 添加 targetFound 事件监听器
+          arTarget.addEventListener('targetFound', function(event) {
+              var foundIndex = event.detail.index;
+
+              // 只有当找到的目标和 num 对应时才触发效果
+              if (foundIndex === num - 1) {
+                  console.log("Correct target found! Displaying content...");
+                  $('.center-box').fadeIn();
+              } else {
+                  console.log("Wrong target found. Ignoring...");
+              }
+          });
+        });
+    </script>
   </body>
 </html>

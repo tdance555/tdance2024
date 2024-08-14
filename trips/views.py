@@ -97,3 +97,6 @@ def route2(request):
 
 def route3(request):
     return render(request, 'route3.html')
+
+def api_test(request):
+    return render(request, 'api_test.html')

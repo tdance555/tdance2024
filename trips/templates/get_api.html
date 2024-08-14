@@ -65,7 +65,7 @@
 </head>
 <body>
     <button class="back-button" onclick="BackToPagepoint()"></button>
-
+    <h1></h1>
     <a-scene 
         mindar-image="imageTargetSrc: ../mind/targets_03.mind; uiError: no; uiLoading: no; uiScanning: no;" 
         color-space="sRGB" 
@@ -103,8 +103,11 @@
 
             // 从 cookie 中取出名为 'level' 的值，并命名为 num
             let num = getCookie('level');
+            // alert(num);//測試是否成功轉成變數
             // console.log('The value of num is:', num);
             // 你可以在这里根据 num 的值执行其他操作
+
+            let phone = getCookie('phone');
 
             var mindarEntity = document.querySelector('a-entity[mindar-image-target]');
             mindarEntity.addEventListener('targetFound', function(event) {
@@ -114,7 +117,7 @@
                     $('.center-box').fadeIn();
 
                     mainurl="http://127.0.0.1:8000/trips/api/question/";
-                    // num=1;
+                    // num=1;//測試變數是否可以放入url
 
                     $.ajax({
                         url: mainurl+num,
@@ -148,6 +151,25 @@
                                 }
 
                                 $('.result').fadeIn();
+
+                                // posturl="http://127.0.0.1:8000/trips/api/update_status/"
+                                // $.ajax({
+                                //     url: posturl+phone,  // 替换为你的更新 API
+                                //     type: "POST",
+                                //     data: {
+                                //         phone: phone,
+                                //         question_number: num,
+                                //         status: status,
+                                //         user_answer: userChoice,
+                                //     },
+                                //     headers: { "X-CSRFToken": getCookie("csrftoken") },
+                                //     success: function(response) {
+                                //         console.log('Status updated successfully:', response);
+                                //     },
+                                //     error: function(xhr, status, error) {
+                                //         console.error('Failed to update status:', error);
+                                //     }
+                                // });
                             });
                         },
                         error: function(xhr, status, error) {

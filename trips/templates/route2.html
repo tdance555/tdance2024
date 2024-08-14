@@ -1,58 +1,223 @@
+<!-- @Author: YI-SYUAN -->
+
 <!DOCTYPE html>
-<html lang="zh-Hant">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>路線2</title>
+    <title>AR遊戲集點</title>
     <style>
-        /* 僅在手機上顯示 */
-        @media (min-width: 481px) {
-            body {
-                display: none;
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-image: url('https://github.com/tdance555/tdance2024/blob/main/media/vendor_icons/WebAR_Background.png?raw=true');  /* 替換為你的背景圖片 URL */
+            background-size: 100% 100%; /* 確保圖片覆蓋整個背景 */
+            background-position: center center; /* 確保圖片居中 */
+            background-repeat: no-repeat; /* 防止圖片重覆 */
+        }
+
+        .container {
+            max-width: 100%;
+            margin: 0 auto;
+            padding: 20px;
+            box-sizing: border-box;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh; /* 確保容器至少占滿整個視口高度 */
+            /*background: rgba(255, 255, 255, 0.8); *//* 半透明白色背景 */
+            flex-wrap:wrap;
+        }
+
+        .content {
+            /* background-color: #ffffff; */
+            padding: 20px;
+            border-radius: 5px;
+            text-align: center;
+            width: 100%;
+            max-width: 500px;
+            padding-top: 50px;
+            /*box-shadow: 0 4px 8px rgba(0,0,0,0.1);  輕微陰影效果 */
+        }
+
+        button{
+            margin: 5px;
+        }
+        .iconbt6{
+            width: 146px;
+            height: 159px;
+            background-color: cadetblue;
+            border: none;
+            color: white;
+            padding: 20px 42px;
+            text-align: center;
+            text-decoration: auto;
+            display: inline-block;
+            font-size: 35px;
+            border-radius: 15px;
+            border: 5px solid white;
+            background-image: url('https://github.com/tdance555/tdance2024/blob/main/media/vendor_icons/6.png?raw=true');
+            text-align: center;
+            background-size: contain;
+            background-repeat: no-repeat;
+        }
+        .iconbt7{
+            width: 146px;
+            height: 159px;
+            background-color: cadetblue;
+            border: none;
+            color: white;
+            padding: 20px 42px;
+            text-align: center;
+            text-decoration: auto;
+            display: inline-block;
+            font-size: 35px;
+            border-radius: 15px;
+            border: 5px solid white;
+            background-image: url('https://github.com/tdance555/tdance2024/blob/main/media/vendor_icons/7.png?raw=true');
+            text-align: center;
+            background-size: contain;
+            background-repeat: no-repeat;
+        }
+        .iconbt8{
+            width: 146px;
+            height: 159px;
+            background-color: cadetblue;
+            border: none;
+            color: white;
+            padding: 20px 42px;
+            text-align: center;
+            text-decoration: auto;
+            display: inline-block;
+            font-size: 35px;
+            border-radius: 15px;
+            border: 5px solid white;
+            background-image: url('https://github.com/tdance555/tdance2024/blob/main/media/vendor_icons/8.png?raw=true');
+            text-align: center;
+            background-size: contain;
+            background-repeat: no-repeat;
+        }
+        .iconbt9{
+            width: 146px;
+            height: 159px;
+            background-color: cadetblue;
+            border: none;
+            color: white;
+            padding: 20px 42px;
+            text-align: center;
+            text-decoration: auto;
+            display: inline-block;
+            font-size: 35px;
+            border-radius: 15px;
+            border: 5px solid white;
+            background-image: url('https://github.com/tdance555/tdance2024/blob/main/media/vendor_icons/9.png?raw=true');
+            text-align: center;
+            background-size: contain;
+            background-repeat: no-repeat;
+        }
+        .iconbt10{
+            width: 146px;
+            height: 159px;
+            background-color: cadetblue;
+            border: none;
+            color: white;
+            padding: 20px 42px;
+            text-align: center;
+            text-decoration: auto;
+            display: inline-block;
+            font-size: 35px;
+            border-radius: 15px;
+            border: 5px solid white;
+            background-image: url('https://github.com/tdance555/tdance2024/blob/main/media/vendor_icons/10.png?raw=true');
+            text-align: center;
+            background-size: contain;
+            background-repeat: no-repeat;
+        }
+        .iconbt11{
+            width: 146px;
+            height: 159px;
+            background-color: cadetblue;
+            border: none;
+            color: white;
+            padding: 20px 42px;
+            text-align: center;
+            text-decoration: auto;
+            display: inline-block;
+            font-size: 35px;
+            border-radius: 15px;
+            border: 5px solid white;
+            background-image: url('https://github.com/tdance555/tdance2024/blob/main/media/vendor_icons/11.png?raw=true');
+            text-align: center;
+            background-size: contain;
+            background-repeat: no-repeat;
+        }
+
+
+        @media (min-width: 320px) and (max-width: 480px) {
+            .container {
+                padding: 10px;
+            }
+
+            .content {
+                font-size: 14px;
             }
         }
 
-        @media (max-width: 480px) {
-            body {
-                font-family: Arial, sans-serif;
-                margin: 0;
-                padding: 0;
-                text-align: center;
-                background-image: url('https://github.com/tdance555/tdance2024/blob/main/media/vendor_icons/WebAR_Background.png?raw=true'); /* 替換為你的背景圖片網址 */
-                background-size: 100% 100%;
-                background-position: center;
-                background-repeat: no-repeat;
-                height: 100vh; /* 背景覆盖整个页面 */
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                flex-direction: column; /* 垂直排列图标 */
+        @media (min-width: 481px) and (max-width: 767px) {
+            .container {
+                padding: 15px;
             }
 
-            .icon-container {
-                display: grid;
-                grid-template-columns: repeat(2, 1fr);
-                gap: 49px;
-                width: 121%;
-                max-width: 333px;
-                padding: 31px 31px;
-            }
-
-            .icon-container img {
-                width: 146px;
-                height: 159px;
+            .content {
+                font-size: 16px;
             }
         }
+
+        @media (min-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+
+            .content {
+                font-size: 18px;
+            }
+        }
+
     </style>
 </head>
 <body>
-    <div class="icon-container">
-        <img src="https://github.com/tdance555/tdance2024/blob/main/media/vendor_icons/6.png?raw=true" alt="Icon 1">
-        <img src="https://github.com/tdance555/tdance2024/blob/main/media/vendor_icons/7.png?raw=true" alt="Icon 2">
-        <img src="https://github.com/tdance555/tdance2024/blob/main/media/vendor_icons/8.png?raw=true" alt="Icon 3">
-        <img src="https://github.com/tdance555/tdance2024/blob/main/media/vendor_icons/9.png?raw=true" alt="Icon 4">
-        <img src="https://github.com/tdance555/tdance2024/blob/main/media/vendor_icons/10.png?raw=true" alt="Icon 5">
-        <img src="https://github.com/tdance555/tdance2024/blob/main/media/vendor_icons/11.png?raw=true" alt="Icon 6">
+    <div class="container">
+        <div class="content">
+            <button class="iconbt6" onclick="num6()"></button>
+            <button class="iconbt7" onclick="num7()"></button>
+            <button class="iconbt8" onclick="num8()"></button>
+            <button class="iconbt9" onclick="num9()"></button>
+            <button class="iconbt10" onclick="num10()"></button>
+            <button class="iconbt11" onclick="num11()"></button>
+        </div>
     </div>
+
+    <script>
+        function num6() {
+            document.cookie = "level=" + "6" + "; path=/; max-age=" + (60 * 60 * 24 * 30); // 30天的過期時間
+        }
+        function num7() {
+            document.cookie = "level=" + "7" + "; path=/; max-age=" + (60 * 60 * 24 * 30); // 30天的過期時間
+        }
+        function num8() {
+            document.cookie = "level=" + "8" + "; path=/; max-age=" + (60 * 60 * 24 * 30); // 30天的過期時間
+        }
+        function num9() {
+            document.cookie = "level=" + "9" + "; path=/; max-age=" + (60 * 60 * 24 * 30); // 30天的過期時間
+        }
+        function num10() {
+            document.cookie = "level=" + "10" + "; path=/; max-age=" + (60 * 60 * 24 * 30); // 30天的過期時間
+        }
+        function num11() {
+            document.cookie = "level=" + "11" + "; path=/; max-age=" + (60 * 60 * 24 * 30); // 30天的過期時間
+        }
+    </script>
 </body>
 </html>
+

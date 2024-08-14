@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <SCript>
+        phone="0988789310";
+        num="1";
+        status:"pass";
+        user_answer:A;
+
+        posturl="http://127.0.0.1:8000/trips/api/update_status/"
+        $.ajax({
+            url: posturl+phone,  // 替换为你的更新 API
+            type: "POST",
+            data: {
+                phone: phone,
+                question_number: num,
+                status: status,
+                user_answer: userChoice,
+            },
+            headers: { "X-CSRFToken": getCookie("csrftoken") },
+            success: function(response) {
+                console.log('Status updated successfully:', response);
+            },
+            error: function(xhr, status, error) {
+                console.error('Failed to update status:', error);
+            }
+        });
+    </SCript>
+</body>
+</html>

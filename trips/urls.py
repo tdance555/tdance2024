@@ -14,6 +14,7 @@ urlpatterns = [
     path('api/user/', UserProfileCreateAPIView.as_view(), name='user-create'),
     path('api/question/<int:question_id>/', QuestionDetailAPIView.as_view(), name='question-detail'),
     path('api/post/<str:phone>/', PostUpdateAPIView.as_view(), name='post-update'),
+    path('api_test/', views.api_test, name='api_test'), 
 ]
 
 
