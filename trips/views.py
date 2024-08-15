@@ -98,3 +98,9 @@ def route2(request):
 
 def route3(request):
     return render(request, 'route3.html')
+
+def function(request):
+    return render(request, 'function.html')
+
+
+function

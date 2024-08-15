@@ -1,0 +1,156 @@
+<!-- @Author: YI-SYUAN -->
+<!-- 功能選擇頁面 -->
+<!-- 已完成: -->
+<!-- 待完成:1.畫面設計、跳轉(我先用主頁連結替一下，到時改) -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AR遊戲集點</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-image: url('https://github.com/tdance555/tdance2024/blob/main/media/vendor_icons/%E6%8D%95%E9%AD%9A%E8%97%8D.png?raw=true');
+            /* 替換為你的背景圖片 URL */
+            background-size: 100% 100%;
+            /* 確保圖片覆蓋整個背景 */
+            background-position: center center;
+            /* 確保圖片居中 */
+            background-repeat: no-repeat;
+            /* 防止圖片重覆 */
+        }
+
+        .container {
+            max-width: 100%;
+            margin: 0 auto;
+            padding: 20px;
+            box-sizing: border-box;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            /* 確保容器至少占滿整個視口高度 */
+            /*background: rgba(255, 255, 255, 0.8); */
+            /* 半透明白色背景 */
+        }
+
+        .content {
+            /* background-color: #000000; */
+            padding: 20px;
+            border-radius: 5px;
+            text-align: center;
+            width: 100%;
+            max-width: 375px;
+            padding-top: 50px;
+            /*box-shadow: 0 4px 8px rgba(0,0,0,0.1);  輕微陰影效果 */
+        }
+
+        .buttonStart {
+            background-color: #4F74AB;
+            color: white;
+            padding: 20px 42px;
+            text-align: center;
+            text-decoration: auto;
+            display: inline-block;
+            font-size: 20px;
+            border-radius: 50px;
+            border: 5px solid #EAD73B;
+            font-weight: bold;
+            margin-bottom: 40px;
+        }
+
+        .buttonOther{
+            background-color: cadetblue;
+            color: white;
+            padding: 20px 42px;
+            text-align: center;
+            text-decoration: auto;
+            display: inline-block;
+            font-size: 16px;
+            border-radius: 10px;
+            border: 5px solid #EAD73B;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        h1{
+            margin-top: 50px;
+            font-size: 20px;
+        }
+
+        h2{
+            font-size: 18px;
+        }
+        .h2Row2{
+            margin-top: -10px;
+            margin-bottom: 55px;
+        }
+
+        @media (min-width: 320px) and (max-width: 480px) {
+            .container {
+                padding: 10px;
+            }
+
+            .content {
+                font-size: 14px;
+            }
+        }
+
+        @media (min-width: 481px) and (max-width: 767px) {
+            .container {
+                padding: 15px;
+            }
+
+            .content {
+                font-size: 16px;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+
+            .content {
+                font-size: 18px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="content">
+            <h1>親愛的旅者，歡迎來到休憩小屋</h1>
+            <h2>這裡是您休憩的地點</h2>
+            <h2 class="h2Row2">您可以隨時回來並選擇你想做的事</h2>
+            <button onclick="ToGamePage()" class="buttonStart">選擇旅遊路線</button>
+            <button onclick="ToTeachPage()" class="buttonOther">如何遊玩遊戲</button>
+            <button onclick="ToMapPage()" class="buttonOther">查詢活動地圖</button>
+            <button onclick="ToOgPage()" class="buttonOther">關於本次活動</button>
+        </div>
+    </div>
+
+    <script>
+        function ToGamePage() {
+            window.location.href = "road";
+        }
+        function ToTeachPage() {
+            window.location.href = "manual";
+        }
+        function ToMapPage() {
+            window.location.href = "map";
+        }
+        function ToOgPage() {
+            window.location.href = "sponsor";
+        }
+
+    </script>
+</body>
+
+</html>
