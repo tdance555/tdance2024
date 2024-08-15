@@ -48,8 +48,8 @@ class PostUpdateAPIView(APIView):
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-def hello_world(request):
-    return HttpResponse("Hello World!")
+# def hello_world(request):
+#     return HttpResponse("Hello World!")
 
 def index(request):
     return render(request, 'index.html')

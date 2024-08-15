@@ -1,9 +1,14 @@
+<!-- @Author: YI-SYUAN -->
+<!-- 使用說明頁 -->
+<!-- 已完成:1.說明文字、2.畫面設計 -->
+<!-- 待處理: -->
+
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>說明書</title>
+    <title>遊戲說明</title>
     <style>
         /* 僅在手機上顯示 */
         @media (min-width: 481px) {
@@ -18,7 +23,7 @@
                 margin: 0;
                 padding: 0;
                 text-align: center; /* 所有文字置中 */
-                background-image: url('https://github.com/tdance555/tdance2024/blob/main/media/vendor_icons/WebAR_Background.png?raw=true');  /* 背景圖像路徑 */
+                background-image: url('https://github.com/tdance555/tdance2024/blob/main/media/vendor_icons/%E9%BB%83%E9%BA%B5%E5%8C%85.png?raw=true');  /* 背景圖像路徑 */
                 background-size: 100% 100%; /* 使背景圖像覆蓋整個背景 */
                 background-position: center center; /* 將背景圖像置中 */
                 background-repeat: no-repeat; /* 防止背景圖像重複 */
@@ -28,20 +33,23 @@
                 display: flex;
                 flex-direction: column;
                 align-items: center;
-                justify-content: center;
+                /* justify-content: center; */
                 height: 100vh; /* 占滿視窗高度 */
                 padding: 20px;
                 box-sizing: border-box;
+                /* border: 2px solid red; */
             }
 
-            .text-container {
+            .textContainer {
                 background-color: rgba(255, 255, 255, 0.8);
-                padding: 20px;
+                /* padding: 20px; */
                 border-radius: 10px;
-                box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-                margin-bottom: 60px;
+                /* box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2); */
+                margin-bottom: 100px;
                 max-width: 100%;
                 text-align: center;
+                margin-top: 150px;
+                /* border: 2px solid red; */
             }
 
             .text1 {
@@ -70,9 +78,8 @@
                 font-size: 24px;
                 outline: auto;
                 font-family: 'Microsoft YaHei';
-                max-width: 169px;
+                max-width: 200px;
                 letter-spacing: 10px;
-
             }
         }
     </style>
@@ -81,13 +88,18 @@
 </head>
 <body>
     <div class="container">
-        <div class="text-container">
+        <div class="textContainer">
             <h1 class="text1">遊戲說明</h1>
             <h2 class="text2">闖關路線有三條</h2>
             <h2 class="text2">每條路線請選擇兩關進行闖關</h2>
             <h2 class="text2">集滿6關即可通關</h2>
         </div>
-        <button type="button" onclick="location.href='{% url 'road' %}'">開始闖關</button>
+        <button type="button" onclick="redirectToPage()">我了解了!</button>
     </div>
+    <script>
+        function redirectToPage() {
+            window.location.href = "road";
+        }
+    </script>
 </body>
 </html>

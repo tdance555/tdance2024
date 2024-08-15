@@ -1,4 +1,7 @@
 <!-- @Author: YI-SYUAN -->
+<!-- 1st梯次路線A組織頁面 -->
+<!-- 已完成:1.廠商放置並排序 -->
+<!-- 待處理:1.跳轉、2.畫面設計、3.引導文字 -->
 
 <!DOCTYPE html>
 <html lang="en">
@@ -11,7 +14,7 @@
             margin: 0;
             padding: 0;
             font-family: Arial, sans-serif;
-            background-image: url('https://github.com/tdance555/tdance2024/blob/main/media/vendor_icons/WebAR_Background.png?raw=true');  /* 替換為你的背景圖片 URL */
+            background-image: url('https://github.com/tdance555/tdance2024/blob/main/media/vendor_icons/%E9%BB%83%E9%BA%B5%E5%8C%85.png?raw=true');  /* 替換為你的背景圖片 URL */
             background-size: 100% 100%; /* 確保圖片覆蓋整個背景 */
             background-position: center center; /* 確保圖片居中 */
             background-repeat: no-repeat; /* 防止圖片重覆 */
@@ -28,6 +31,7 @@
             min-height: 100vh; /* 確保容器至少占滿整個視口高度 */
             /*background: rgba(255, 255, 255, 0.8); *//* 半透明白色背景 */
             flex-wrap:wrap;
+            
         }
 
         .content {
@@ -36,8 +40,10 @@
             border-radius: 5px;
             text-align: center;
             width: 100%;
+            height: 100%;
             max-width: 500px;
-            padding-top: 50px;
+            /* padding-top: 50px; */
+            /* border: 2px solid red; */
             /*box-shadow: 0 4px 8px rgba(0,0,0,0.1);  輕微陰影效果 */
         }
 
@@ -47,7 +53,7 @@
         .iconbt1{
             width: 146px;
             height: 159px;
-            background-color: rgb(41, 64, 42);
+            background-color:#4F74AB;
             border: none;
             color: white;
             padding: 20px 42px;
@@ -56,7 +62,7 @@
             display: inline-block;
             font-size: 35px;
             border-radius: 15px;
-            border: 5px solid white;
+            border: 5px solid #EAD73B;
             background-image: url('https://github.com/tdance555/tdance2024/blob/main/media/vendor_icons/1.png?raw=true');
             text-align: center;
             background-size: contain;
@@ -65,7 +71,7 @@
         .iconbt2{
             width: 146px;
             height: 159px;
-            background-color: rgb(41, 64, 42);
+            background-color:#4F74AB;
             border: none;
             color: white;
             padding: 20px 42px;
@@ -74,7 +80,7 @@
             display: inline-block;
             font-size: 35px;
             border-radius: 15px;
-            border: 5px solid white;
+            border: 5px solid #EAD73B;
             background-image: url('https://github.com/tdance555/tdance2024/blob/main/media/vendor_icons/2.png?raw=true');
             text-align: center;
             background-size: contain;
@@ -83,7 +89,7 @@
         .iconbt3{
             width: 146px;
             height: 159px;
-            background-color: rgb(41, 64, 42);
+            background-color:#4F74AB;
             border: none;
             color: white;
             padding: 20px 42px;
@@ -92,7 +98,7 @@
             display: inline-block;
             font-size: 35px;
             border-radius: 15px;
-            border: 5px solid white;
+            border: 5px solid #EAD73B;
             background-image: url('https://github.com/tdance555/tdance2024/blob/main/media/vendor_icons/3.png?raw=true');
             text-align: center;
             background-size: contain;
@@ -101,7 +107,7 @@
         .iconbt4{
             width: 146px;
             height: 159px;
-            background-color: rgb(41, 64, 42);
+            background-color:#4F74AB;
             border: none;
             color: white;
             padding: 20px 42px;
@@ -110,7 +116,7 @@
             display: inline-block;
             font-size: 35px;
             border-radius: 15px;
-            border: 5px solid white;
+            border: 5px solid #EAD73B;
             background-image: url('https://github.com/tdance555/tdance2024/blob/main/media/vendor_icons/4.png?raw=true');
             text-align: center;
             background-size: contain;
@@ -119,7 +125,7 @@
         .iconbt5{
             width: 146px;
             height: 159px;
-            background-color: rgb(41, 64, 42);
+            background-color:#4F74AB;
             border: none;
             color: white;
             padding: 20px 42px;
@@ -128,7 +134,7 @@
             display: inline-block;
             font-size: 35px;
             border-radius: 15px;
-            border: 5px solid white;
+            border: 5px solid #EAD73B;
             background-image: url('https://github.com/tdance555/tdance2024/blob/main/media/vendor_icons/5.png?raw=true');
             text-align: center;
             background-size: contain;
@@ -137,7 +143,7 @@
         .iconbt18{
             width: 146px;
             height: 159px;
-            background-color: rgb(41, 64, 42);
+            background-color:#4F74AB;
             border: none;
             color: white;
             padding: 20px 42px;
@@ -146,13 +152,23 @@
             display: inline-block;
             font-size: 35px;
             border-radius: 15px;
-            border: 5px solid white;
+            border: 5px solid #EAD73B;
             background-image: url('https://github.com/tdance555/tdance2024/blob/main/media/vendor_icons/18.png?raw=true');
             text-align: center;
             background-size: contain;
             background-repeat: no-repeat;
         }
+        h1 {
 
+            margin-top: -10px;
+            font-size: 20px;
+        }
+
+        h2 {
+
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
 
         @media (min-width: 320px) and (max-width: 480px) {
             .container {
@@ -189,6 +205,9 @@
 <body>
     <div class="container">
         <div class="content">
+            <h1>這是條自然氣息濃厚的道路</h1>
+            <h1>路上有著多個奇蹟等你挖掘</h1>
+            <h2 class="h2Row2">請任意選擇「兩個」事件並進行通關</h2>
             <button class="iconbt1" onclick="num1()"></button>
             <button class="iconbt2" onclick="num2()"></button>
             <button class="iconbt3" onclick="num3()"></button>
@@ -201,32 +220,28 @@
     <script>
         function num1() {
             document.cookie = "level=" + "1" + "; path=/; max-age=" + (60 * 60 * 24 * 30); // 30天的過期時間
+            window.location.href = "arScan1";//解決CROS問題
         }
         function num2() {
             document.cookie = "level=" + "2" + "; path=/; max-age=" + (60 * 60 * 24 * 30); // 30天的過期時間
+            window.location.href = "arScan2";
         }
         function num3() {
             document.cookie = "level=" + "3" + "; path=/; max-age=" + (60 * 60 * 24 * 30); // 30天的過期時間
+            window.location.href = "arScan3";
         }
         function num4() {
             document.cookie = "level=" + "4" + "; path=/; max-age=" + (60 * 60 * 24 * 30); // 30天的過期時間
+            window.location.href = "arScan4";
         }
         function num5() {
             document.cookie = "level=" + "5" + "; path=/; max-age=" + (60 * 60 * 24 * 30); // 30天的過期時間
+            window.location.href = "arScan5";
         }
         function num18() {
             document.cookie = "level=" + "18" + "; path=/; max-age=" + (60 * 60 * 24 * 30); // 30天的過期時間
+            window.location.href = "arScan18";
         }
     </script>
 </body>
 </html>
-
- <!-- <div class="container">
-        <button class="levelbt" onclick="setlevel()" ></button>
-        <img src="https://github.com/tdance555/tdance2024/blob/main/media/vendor_icons/1.png?raw=true" alt="Icon 1">
-        <img src="https://github.com/tdance555/tdance2024/blob/main/media/vendor_icons/2.png?raw=true" alt="Icon 2">
-        <img src="https://github.com/tdance555/tdance2024/blob/main/media/vendor_icons/3.png?raw=true" alt="Icon 3">
-        <img src="https://github.com/tdance555/tdance2024/blob/main/media/vendor_icons/4.png?raw=true" alt="Icon 4">
-        <img src="https://github.com/tdance555/tdance2024/blob/main/media/vendor_icons/5.png?raw=true" alt="Icon 5">
-        <img src="https://github.com/tdance555/tdance2024/blob/main/media/vendor_icons/18.png?raw=true" alt="Icon 6">
-    </div> -->
