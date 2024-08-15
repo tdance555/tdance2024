@@ -78,6 +78,7 @@ def user_profile(request):
 
 def get_api(request):
     return render(request, 'get_api.html')
+# AR_scan前身
 
 
 def ar_scan01(request):
@@ -97,6 +98,3 @@ def route2(request):
 
 def route3(request):
     return render(request, 'route3.html')
-
-def api_test(request):
-    return render(request, 'api_test.html')
