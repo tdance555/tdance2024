@@ -101,6 +101,3 @@ def route3(request):
 
 def function(request):
     return render(request, 'function.html')
-
-
-function
