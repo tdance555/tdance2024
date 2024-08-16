@@ -6,7 +6,8 @@ from .models import Question, UserProfile, Post
 class QuestionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Question
-        fields = ['title', 'icon', 'question', 'choiceA', 'choiceB', 'choiceC', 'choiceD', 'answer']
+        fields = ['batch', 'title', 'icon', 'question',
+                  'choiceA', 'choiceB', 'choiceC', 'choiceD', 'answer']
 
 
 class PostSerializer(serializers.ModelSerializer):
