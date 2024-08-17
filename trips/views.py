@@ -27,7 +27,43 @@ class QuestionDetailAPIView(APIView):
         return Response(serializer.data, status=status.HTTP_200_OK)
 
 
-class UserProfileCreateAPIView(APIView):
+class UserProfileAPIView(APIView):
+    def get(self, request):
+        phone = request.query_params.get('phone')
+        level = request.query_params.get('level')
+
+        if not phone:
+            return Response({"error": "缺少手機號碼"}, status=status.HTTP_400_BAD_REQUEST)
+
+        try:
+            user_profile = UserProfile.objects.get(phone=phone)
+        except UserProfile.DoesNotExist:
+            return Response({"error": "用户不存在"}, status=status.HTTP_404_NOT_FOUND)
+
+        try:
+            post = Post.objects.get(user=user_profile)
+        except Post.DoesNotExist:
+            return Response({"error": "用户遊戲歷程不存在"}, status=status.HTTP_404_NOT_FOUND)
+
+        user_data = UserProfileSerializer(user_profile).data
+
+        if level:
+            if not level.isdigit() or int(level) < 1 or int(level) > 29:
+                return Response({"error": "無效的關卡參數"}, status=status.HTTP_400_BAD_REQUEST)
+
+            level = str(int(level))
+            content = user_data['post']['content']
+
+            if level not in content:
+                return Response({"error": "該關卡不存在"}, status=status.HTTP_404_NOT_FOUND)
+
+            return Response({level: content[level]}, status=status.HTTP_200_OK)
+        else:
+            return Response(user_data, status=status.HTTP_200_OK)
+
+
+        return Response(response_data, status=status.HTTP_200_OK)
+
     def post(self, request, *args, **kwargs):
         serializer = UserProfileSerializer(data=request.data)
         if serializer.is_valid():
