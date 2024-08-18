@@ -1,6 +1,6 @@
 # trips/urls.py
 from django.urls import path
-from .views import QuestionDetailAPIView, UserProfileAPIView, PostUpdateAPIView
+from .views import QuestionDetailAPIView, UserProfileAPIView, PostUpdateAPIView,PostRetrieveAPIView,CheckRecordsAPIView
 from . import views
 urlpatterns = [
     path('', views.index, name='index'),
@@ -17,8 +17,10 @@ urlpatterns = [
     path('api/user/', UserProfileAPIView.as_view(), name='user-create'),
     path('api/question/<int:question_id>/', QuestionDetailAPIView.as_view(), name='question-detail'),
     path('api/post/<str:phone>/', PostUpdateAPIView.as_view(), name='post-update'),
-
+    path('api/post/<str:phone>/retrieve/', PostRetrieveAPIView.as_view(), name='post-retrieve'),
+    path('check-records/', CheckRecordsAPIView.as_view(), name='check-records'),
 ]
+
 
 
 

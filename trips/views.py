@@ -73,16 +73,15 @@ class UserProfileAPIView(APIView):
 
 
 class PostUpdateAPIView(APIView):
-    def patch(self, request, phone,  *args, **kwargs):
+    def patch(self, request, phone, *args, **kwargs):
         try:
-            user_profile = UserProfile.objects.get(phone=phone)
-            post = Post.objects.get(user=user_profile)
+            # 獲取或創建與該手機號碼相關的 user_profile 和 post
+            user_profile, _ = UserProfile.objects.get_or_create(phone=phone)
+            post, created = Post.objects.get_or_create(user=user_profile)
         except UserProfile.DoesNotExist:
             return Response({"error": "User profile not found"}, status=status.HTTP_404_NOT_FOUND)
         except Post.DoesNotExist:
             return Response({"error": "User post not found"}, status=status.HTTP_404_NOT_FOUND)
-
-        post, created = Post.objects.get_or_create(user=user_profile)
 
         level = request.data.get("level")
         level_status = request.data.get('status')
@@ -92,7 +91,13 @@ class PostUpdateAPIView(APIView):
         if level is None:
             return Response({"error": "缺少 level 或 data 参数"}, status=status.HTTP_400_BAD_REQUEST)
 
+        # 初始化 content 作為一個空字典（若之前沒有設置 content）
+        if post.content is None:
+            post.content = {}
+
         content = post.content
+
+        # 檢查關卡是否存在並更新或創建對應的內容
         if level in content:
             if level_status is not None:
                 content[level]['status'] = level_status
@@ -100,12 +105,20 @@ class PostUpdateAPIView(APIView):
                 content[level]['user_answer'] = user_answer
             if correct_answer is not None:
                 content[level]['correct_answer'] = correct_answer
-
-            post.content = content
-            post.save()
-            return Response(content[level], status=status.HTTP_200_OK)
         else:
-            return Response({"error": "無效的關卡"}, status=status.HTTP_400_BAD_REQUEST)
+            content[level] = {
+                'status': level_status or '',
+                'user_answer': user_answer or '',
+                'correct_answer': correct_answer or ''
+            }
+
+        # 保存更新
+        post.content = content
+        post.save()
+
+        return Response(content[level], status=status.HTTP_200_OK)
+    
+
 
 
 # def hello_world(request):
@@ -134,6 +147,41 @@ def user_profile(request):
 
     return render(request, 'user_profile.html', {'form': form})
 
+class PostRetrieveAPIView(APIView):
+    def get(self, request, phone, *args, **kwargs):
+        try:
+            user_profile = UserProfile.objects.get(phone=phone)
+            post = Post.objects.get(user=user_profile)
+        except UserProfile.DoesNotExist:
+            return Response({"error": "User profile not found"}, status=status.HTTP_404_NOT_FOUND)
+        except Post.DoesNotExist:
+            return Response({"error": "User post not found"}, status=status.HTTP_404_NOT_FOUND)
+        
+        serializer = PostSerializer(post)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+class CheckRecordsAPIView(APIView):
+    def get(self, request, *args, **kwargs):
+        phone = request.query_params.get('phone')
+        if not phone:
+            return Response({"error": "缺少手機號碼"}, status=status.HTTP_400_BAD_REQUEST)
+
+        try:
+            user_profile = UserProfile.objects.get(phone=phone)
+        except UserProfile.DoesNotExist:
+            return Response({"error": "用户不存在"}, status=status.HTTP_404_NOT_FOUND)
+
+        try:
+            post = Post.objects.get(user=user_profile)
+        except Post.DoesNotExist:
+            return Response({"error": "用户遊戲歷程不存在"}, status=status.HTTP_404_NOT_FOUND)
+
+        user_data = UserProfileSerializer(user_profile).data
+        content = user_data['post']['content']
+
+        response_data = {level: content.get(level, {}) for level in content}
+
+        return Response(response_data, status=status.HTTP_200_OK)
 
 # def profile_success(request, number):
 #     question = get_object_or_404(Question, number=number)
@@ -172,3 +220,5 @@ def function(request):
 
 def arScan1(request):
     return render(request, 'arScan1.html')
+
+
