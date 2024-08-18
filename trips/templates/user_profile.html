@@ -1,8 +1,3 @@
-<!-- @Author: YI-SYUAN -->
-<!-- 使用者註冊頁 -->
-<!-- 已完成:1.手機號碼輸入、存入、格式錯誤及未填阻擋、2.性別輸入、存入、格式錯誤及未填阻擋、3.畫面設計、4.跳轉 -->
-<!-- 待處理:1.手機號碼比對 -->
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -64,7 +59,7 @@
             }
 
             .gender-button.selected {
-                background-color:lightseagreen; /* 選中狀態的背景顏色 */
+                background-color: lightseagreen; /* 選中狀態的背景顏色 */
                 color: white; /* 選中狀態的文字顏色 */
             }
 
@@ -84,7 +79,7 @@
             button {
                 width: 100%;
                 padding: 10px;
-                background-color:lightseagreen; /* 送出按鈕背景顏色 */
+                background-color: lightseagreen; /* 送出按鈕背景顏色 */
                 color: white; /* 送出按鈕文字顏色 */
                 border: none;
                 border-radius: 5px;
@@ -159,23 +154,27 @@
                     alert("請輸入有效的手機號碼");
                     event.preventDefault(); // 阻止表單提交
                 } else {
-                    // 將國際化的電話號碼設置為隱藏字段，以便後端處理
+                    // 獲取格式化的手機號碼
+                    var formattedPhoneNumber = iti.getNumber();
+                    
+                    // 將國際化的電話號碼轉換為本地格式
+                    var localPhoneNumber = formattedPhoneNumber.replace("+886", "0");
+                    
+                    // 將本地化的電話號碼設置為隱藏字段，以便後端處理
                     var hiddenPhoneInput = document.createElement("input");
                     hiddenPhoneInput.setAttribute("type", "hidden");
                     hiddenPhoneInput.setAttribute("name", "international_phone");
-                    hiddenPhoneInput.setAttribute("value", iti.getNumber());
+                    hiddenPhoneInput.setAttribute("value", formattedPhoneNumber);
                     document.getElementById("user-form").appendChild(hiddenPhoneInput);
 
-                    // 設置Cookie保存手機號碼
-                    document.cookie = "phone=" + iti.getNumber() + "; path=/; max-age=" + (60 * 60 * 24 * 30); // 30天的過期時間
+                    // 設置Cookie保存本地格式的手機號碼
+                    document.cookie = "phone=" + localPhoneNumber + "; path=/; max-age=" + (60 * 60 * 24 * 30); // 30天的過期時間
                 }
+
                 // 檢查是否選擇了性別
                 if (document.getElementById('id_gender').value === '') {
                     alert("請選擇性別");
                     event.preventDefault(); // 阻止表單提交
-                } else {
-                    // 若一切正確，進行重定向
-                    window.location.href = "{% url 'manual' %}";
                 }
             });
         });

@@ -1,16 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AR Game</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
     <style>
         .back-button {
             position: fixed;
             top: 10px;
             left: 10px;
-            width: 50px;
-            height: 50px;
+            width: 100px;
+            height: 100px;
             background-image: url('https://github.com/tdance555/tdance2024/blob/main/media/vendor_icons/%E5%B0%8D%E9%8C%AF%E8%BF%94%E5%9B%9E_%E5%B7%A5%E4%BD%9C%E5%8D%80%E5%9F%9F%201%20%E8%A4%87%E6%9C%AC%204.png?raw=true');
             background-size: cover;
             background-color: transparent;
@@ -18,7 +22,7 @@
             cursor: pointer;
             z-index: 1000;
         }
-  
+
         .center-box {
             position: fixed;
             top: 50%;
@@ -51,7 +55,6 @@
         .result {
             display: none;
             font-size: 18px;
-            font-weight: bold;
         }
 
         .result img {
@@ -59,25 +62,17 @@
             height: auto;
         }
     </style>
-    <title>Document</title>
-    <script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
 </head>
+
 <body>
-    <button class="back-button" onclick="BackToPagepoint()"></button>
+    <button class="back-button" onclick="window.history.back()"></button>
     <h1></h1>
-    <a-scene 
-        mindar-image="imageTargetSrc: ../mind/targets_03.mind; uiError: no; uiLoading: no; uiScanning: no;" 
-        color-space="sRGB" 
-        renderer="colorManagement: true, physicallyCorrectLights" 
-        vr-mode-ui="enabled: false" 
-        device-orientation-permission-ui="enabled: false">
-        
+    <a-scene mindar-image="imageTargetSrc: ../mind/targets_01.mind; uiError: no; uiLoading: no; uiScanning: no;" color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false">
         <a-assets>
-            <img id="card" src="https://github.com/tdance555/tdance2024/blob/main/trips/img/img_03.png?raw=true" />
+            <img id="card" src="https://github.com/tdance555/tdance2024/blob/main/trips/img/img_01.png?raw=true" />
             <a-asset-item id="avatarModel" src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.2.5/examples/image-tracking/assets/card-example/softmind/scene.gltf"></a-asset-item>
         </a-assets>
-  
+
         <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
         <a-entity mindar-image-target="targetIndex: 0"></a-entity>
     </a-scene>
@@ -85,8 +80,7 @@
     <div class="center-box"></div>
 
     <script>
-
-        // 函数：获取指定名称的 cookie 值
+        // 函數：獲取指定名稱的 cookie 值
         function getCookie(name) {
             let nameEQ = name + "=";
             let ca = document.cookie.split(';');
@@ -98,33 +92,30 @@
             return null;
         }
 
-        $(document).ready(function() {
+        $(document).ready(function () {
             let targetFoundOnce = false;
 
-            // 从 cookie 中取出名为 'level' 的值，并命名为 num
+            // 從 cookie 中取得 level
             let num = getCookie('level');
-            // alert(num);//測試是否成功轉成變數
-            // console.log('The value of num is:', num);
-            // 你可以在这里根据 num 的值执行其他操作
 
-            let phone = getCookie('phone');
+            // let phone = getCookie('phone');  // 這裡取 cookie 的部分已被註解掉
+            let phone = "0922222222"; // 手機號碼被設置為固定值 0922222222
 
             var mindarEntity = document.querySelector('a-entity[mindar-image-target]');
-            mindarEntity.addEventListener('targetFound', function(event) {
+            mindarEntity.addEventListener('targetFound', function (event) {
                 if (!targetFoundOnce) {
                     targetFoundOnce = true;
 
                     $('.center-box').fadeIn();
 
-                    mainurl="http://127.0.0.1:8000/trips/api/question/";
-                    // num=1;//測試變數是否可以放入url
+                    mainurl = "http://127.0.0.1:8000/trips/api/question/";
 
                     $.ajax({
-                        url: mainurl+num,
+                        url: mainurl + num,
                         type: "GET",
                         dataType: "json",
-                        success: function(Question) {
-                            var correctAnswer = Question.answer;  // 正確答案的字母
+                        success: function (Question) {
+                            var correctAnswer = Question.answer;
                             var content = `
                                 <div class="question">${Question.question}</div>
                                 <button class="option" data-choice="A">${Question.choiceA}</button>
@@ -135,45 +126,44 @@
                             `;
                             $('.center-box').html(content);
 
-                            // 為每個選項按鈕添加點擊事件
-                            $('.option').click(function() {
+                            $('.option').click(function () {
                                 var userChoice = $(this).data('choice');
+                                var status = userChoice === correctAnswer ? 'pass' : 'fail';
 
                                 // 移除問題和選項按鈕
                                 $('.question, .option').remove();
 
-                                if (userChoice === correctAnswer) {
-                                    // 正確答案
-                                    $('.result').html('<p>恭喜通關</p><img src="path_to_success_image.png" alt="Success Image">');
+                                if (status === 'pass') {
+                                    $('.result').html('<p>恭喜通關</p><img src="path_to_success_image.png" alt="Success Image"><button onclick="window.history.back()">繼續前行</button>');
                                 } else {
-                                    // 錯誤答案
-                                    $('.result').html('<p>挑戰失敗</p><img src="path_to_failure_image.png" alt="Failure Image">');
+                                    $('.result').html('<p>挑戰失敗</p><img src="path_to_failure_image.png" alt="Failure Image"><button onclick="window.history.back()">繼續前行</button>');
                                 }
 
                                 $('.result').fadeIn();
 
-                                // posturl="http://127.0.0.1:8000/trips/api/post/"
-                                // $.ajax({
-                                //     url: posturl+phone,  // 替换为你的更新 API
-                                //     type: "POST",
-                                //     data:
-                                //      num{
-                                //         phone: phone,
-                                //         question_number: num,
-                                //         status: status,
-                                //         user_answer: userChoice,
-                                //     },
-                                //     headers: { "X-CSRFToken": getCookie("csrftoken") },
-                                //     success: function(response) {
-                                //         console.log('Status updated successfully:', response);
-                                //     },
-                                //     error: function(xhr, status, error) {
-                                //         console.error('Failed to update status:', error);
-                                //     }
-                                // });
+                                // 發送 PATCH 請求更新資料
+                                $.ajax({
+                                    url: `http://127.0.0.1:8000/trips/api/post/${phone}/`,
+                                    type: "PATCH",
+                                    contentType: "application/json",
+                                    data: JSON.stringify({
+                                        level: num,
+                                        status: status,
+                                        user_answer: userChoice,
+                                        correct_answer: correctAnswer
+                                    }),
+                                    success: function (response) {
+                                        console.log("資料更新成功:", response);
+                                    },
+                                    error: function (xhr, status, error) {
+                                        console.log("Phone:", phone); // 應該打印類似 0922222222 的格式
+                                        console.log("Level:", num);   // 應該打印當前的等級
+                                        console.error("更新失敗:", xhr.responseText);
+                                    }
+                                });
                             });
                         },
-                        error: function(xhr, status, error) {
+                        error: function (xhr, status, error) {
                             console.error('AJAX request failed:', error);
                         }
                     });
@@ -182,9 +172,7 @@
                 }
             });
         });
-        function BackToPagepoint() {
-            window.location.href = "http://127.0.0.1:8000/trips/profile/";//解決CROS問題
-        }
     </script>
 </body>
+
 </html>

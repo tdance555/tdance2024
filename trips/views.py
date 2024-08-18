@@ -82,6 +82,8 @@ class PostUpdateAPIView(APIView):
         except Post.DoesNotExist:
             return Response({"error": "User post not found"}, status=status.HTTP_404_NOT_FOUND)
 
+        post, created = Post.objects.get_or_create(user=user_profile)
+
         level = request.data.get("level")
         level_status = request.data.get('status')
         user_answer = request.data.get('user_answer')
@@ -167,3 +169,6 @@ def route3(request):
 
 def function(request):
     return render(request, 'function.html')
+
+def arScan1(request):
+    return render(request, 'arScan1.html')

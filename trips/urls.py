@@ -11,6 +11,8 @@ urlpatterns = [
     path('profile/manual/function/road/route1/', views.route1, name='route1'),  # 添加这一行
     path('profile/manual/function/road/route2/', views.route2, name='route2'),  # 添加这一行
     path('profile/manual/function/road/route3/', views.route3, name='route3'),  # 添加这一行
+    path('profile/manual/function/road/route1/arScan1', views.arScan1, name='arScan1'),
+    
     path('get_api/', views.get_api, name='get_api'),
     path('api/user/', UserProfileAPIView.as_view(), name='user-create'),
     path('api/question/<int:question_id>/', QuestionDetailAPIView.as_view(), name='question-detail'),
