@@ -2,8 +2,8 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import generics, status
 from django.shortcuts import render, redirect, get_object_or_404
-from django.http import HttpResponse
-from .models import Post, Question, UserProfile
+from django.http import HttpResponse,JsonResponse
+from .models import Post, Question, UserProfile,default_content
 from .serializers import QuestionSerializer, UserProfileSerializer, PostSerializer
 from .forms import UserProfileForm
 
@@ -129,11 +129,17 @@ class PostListCreate(generics.ListCreateAPIView):
 
 def user_profile(request):
     if request.method == 'POST':
+        phone = request.POST.get('phone')
+
+        # 檢查電話號碼是否已存在
+        if UserProfile.objects.filter(phone=phone).exists():
+            return JsonResponse({'exists': True, 'message': '此手機號碼已經註冊過了'}, status=400)
+
         form = UserProfileForm(request.POST)
         if form.is_valid():
             form.save()
-            # 表单成功后重定向到 manual 页面
-            return redirect('manual')
+            return JsonResponse({'exists': False, 'redirect_url': '/trips/profile/manual/'})
+
     else:
         form = UserProfileForm()
 
@@ -143,25 +149,29 @@ class PostDetailAPIView(APIView):
 
     def get_object(self, phone):
         try:
-            # 獲取對應的 UserProfile
-            user_profile = UserProfile.objects.get(phone=phone)
-            # 獲取對應的 Post
-            return Post.objects.get(user=user_profile)
-        except UserProfile.DoesNotExist:
-            return None
-        except Post.DoesNotExist:
+            post, created = Post.objects.get_or_create(phone=phone)
+            if created:
+                # 如果是新創建的 Post，初始化所有關卡的狀態為 null
+                levels = [str(i) for i in range(1, 30)]  # 假設有 29 關
+                post.content = {level: {'status': 'null', 'user_answer': '', 'correct_answer': ''} for level in levels}
+                post.save()
+            return post
+        except Exception as e:
+            print(f"get_object 錯誤: {e}")
             return None
 
     def get(self, request, phone, *args, **kwargs):
         post_instance = self.get_object(phone)
         if not post_instance:
             return Response(
-                {"error": "User post not found"},
-                status=status.HTTP_404_NOT_FOUND
+                {"error": "創建或獲取資料失敗"},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR
             )
+
+        # 使用序列化器返回資料
         serializer = PostSerializer(post_instance)
         return Response(serializer.data, status=status.HTTP_200_OK)
-
+    
 # class CheckRecordsAPIView(APIView):
 #     def get(self, request, *args, **kwargs):
 #         phone = request.query_params.get('phone')

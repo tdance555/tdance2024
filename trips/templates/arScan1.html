@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-Hant">
 
 <head>
     <meta charset="UTF-8">
@@ -61,26 +61,46 @@
             max-width: 100%;
             height: auto;
         }
+
+        .message {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+
+        .continue-button {
+            display: none;
+            font-size: 16px;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
     </style>
 </head>
 
 <body>
     <button class="back-button" onclick="window.history.back()"></button>
-    <h1></h1>
     <a-scene mindar-image="imageTargetSrc: ../mind/targets_01.mind; uiError: no; uiLoading: no; uiScanning: no;" color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false">
         <a-assets>
             <img id="card" src="https://github.com/tdance555/tdance2024/blob/main/trips/img/img_01.png?raw=true" />
             <a-asset-item id="avatarModel" src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.2.5/examples/image-tracking/assets/card-example/softmind/scene.gltf"></a-asset-item>
         </a-assets>
-
         <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
         <a-entity mindar-image-target="targetIndex: 0"></a-entity>
     </a-scene>
 
-    <div class="center-box"></div>
+    <div class="center-box">
+        <div class="message" id="message"></div>
+        <div id="question-container" style="display: none;">
+            <!-- 這裡會動態插入題目和選項 -->
+        </div>
+        <button class="continue-button" onclick="window.history.back()">繼續前行</button>
+    </div>
 
     <script>
-        // 函數：獲取指定名稱的 cookie 值
+        // Function to get the value of a specified cookie
         function getCookie(name) {
             let nameEQ = name + "=";
             let ca = document.cookie.split(';');
@@ -94,84 +114,110 @@
 
         $(document).ready(function () {
             let targetFoundOnce = false;
-
-            // 從 cookie 中取得 level
             let num = getCookie('level');
+            let phone = getCookie('phone');
 
-            let phone = getCookie('phone');  // 這裡取 cookie 的部分已被註解掉
-            // let phone = "0945678945"; // 手機號碼被設置為固定值 0945678945
+            function loadQuestion() {
+                $.ajax({
+                    url: `http://127.0.0.1:8000/api/post/${phone}/detail/`,
+                    type: "GET",
+                    dataType: "json",
+                    success: function (Post) {
+                        let currentStatus = Post.content[num]?.status;
 
-            var mindarEntity = document.querySelector('a-entity[mindar-image-target]');
+                        if (currentStatus === 'pass' || currentStatus === 'fail') {
+                            $('#message').text('您已答題過了，請繼續前行吧！');
+                            $('.continue-button').show();
+                        } else {
+                            $('#question-container').show();
+                            fetchQuestion(num);
+                        }
+                    },
+                    error: function (xhr) {
+                        if (xhr.status === 404) {
+                            $.ajax({
+                                url: `http://127.0.0.1:8000/api/post/${phone}/detail/`,
+                                type: "POST",
+                                contentType: "application/json",
+                                data: JSON.stringify({
+                                    content: { [num]: { status: 'null', user_answer: '', correct_answer: '' } }
+                                }),
+                                success: function () {
+                                    loadQuestion();
+                                },
+                                error: function () {
+                                    $('#message').text('創建資料失敗，請稍後再試。');
+                                }
+                            });
+                        } else {
+                            $('#message').text('載入資料失敗，請稍後再試。');
+                        }
+                    }
+                });
+            }
+
+            function fetchQuestion(level) {
+                $.ajax({
+                    url: `http://127.0.0.1:8000/trips/api/question/${level}/`,
+                    type: "GET",
+                    dataType: "json",
+                    success: function (Question) {
+                        let correctAnswer = Question.answer;
+                        let content = `
+                            <div class="question">${Question.question}</div>
+                            <button class="option" data-choice="A">${Question.choiceA}</button>
+                            <button class="option" data-choice="B">${Question.choiceB}</button>
+                            <button class="option" data-choice="C">${Question.choiceC}</button>
+                            <button class="option" data-choice="D">${Question.choiceD}</button>
+                            <div class="result"></div>
+                        `;
+                        $('#question-container').html(content);
+
+                        $('.option').click(function () {
+                            let userChoice = $(this).data('choice');
+                            let status = userChoice === correctAnswer ? 'pass' : 'fail';
+
+                            $('.question, .option').remove();
+
+                            if (status === 'pass') {
+                                $('.result').html('<p>恭喜通關</p><img src="path_to_success_image.png" alt="Success Image">');
+                            } else {
+                                $('.result').html('<p>挑戰失敗</p><img src="path_to_failure_image.png" alt="Failure Image">');
+                            }
+
+                            $('.result').fadeIn();
+
+                            $.ajax({
+                                url: `http://127.0.0.1:8000/api/post/${phone}/detail/`,
+                                type: "PATCH",
+                                contentType: "application/json",
+                                data: JSON.stringify({
+                                    level: level,
+                                    status: status,
+                                    user_answer: userChoice,
+                                    correct_answer: correctAnswer
+                                }),
+                                success: function () {
+                                    console.log("Post updated successfully");
+                                },
+                                error: function () {
+                                    console.error("Failed to update post");
+                                }
+                            });
+                        });
+                    },
+                    error: function () {
+                        $('#message').text('無法載入題目，請稍後再試。');
+                    }
+                });
+            }
+
+            let mindarEntity = document.querySelector('a-entity[mindar-image-target]');
             mindarEntity.addEventListener('targetFound', function (event) {
                 if (!targetFoundOnce) {
                     targetFoundOnce = true;
-
                     $('.center-box').fadeIn();
-
-                    // 獲取問題
-                    mainurl = "http://127.0.0.1:8000/trips/api/question/";
-
-                    $.ajax({
-                        url: mainurl + num,
-                        type: "GET",
-                        dataType: "json",
-                        success: function (Question) {
-                            var correctAnswer = Question.answer;
-                            var content = `
-                                <div class="question">${Question.question}</div>
-                                <button class="option" data-choice="A">${Question.choiceA}</button>
-                                <button class="option" data-choice="B">${Question.choiceB}</button>
-                                <button class="option" data-choice="C">${Question.choiceC}</button>
-                                <button class="option" data-choice="D">${Question.choiceD}</button>
-                                <div class="result"></div>
-                            `;
-                            $('.center-box').html(content);
-
-                            $('.option').click(function () {
-                                var userChoice = $(this).data('choice');
-                                var status = userChoice === correctAnswer ? 'pass' : 'fail';
-
-                                // 移除問題和選項按鈕
-                                $('.question, .option').remove();
-
-                                if (status === 'pass') {
-                                    $('.result').html('<p>恭喜通關</p><img src="path_to_success_image.png" alt="Success Image">');
-                                } else {
-                                    $('.result').html('<p>挑戰失敗</p><img src="path_to_failure_image.png" alt="Failure Image">');
-                                }
-
-                                $('.result').fadeIn();
-
-                                // 發送 PATCH 請求更新資料
-                                $.ajax({
-                                    url: `http://127.0.0.1:8000/trips/api/post/${phone}/`,
-                                    type: "PATCH",
-                                    contentType: "application/json",
-                                    data: JSON.stringify({
-                                        level: num,
-                                        status: status,
-                                        user_answer: userChoice,
-                                        correct_answer: correctAnswer
-                                    }),
-                                    success: function (response) {
-                                        console.log("資料更新成功:", response);
-                                        
-                                    },
-                                    error: function (xhr, status, error) {
-                                        console.log("Phone:", phone); // 應該打印類似 0945678945 的格式
-                                        console.log("Level:", num);   // 應該打印當前的等級
-                                        console.error("更新失敗:", xhr.responseText);
-
-                                    }
-                                });
-                            });
-                        },
-                        error: function (xhr, status, error) {
-                            console.error('AJAX request failed:', error);
-                        }
-                    });
-
-                    mindarEntity.removeEventListener('targetFound', arguments.callee);
+                    loadQuestion();
                 }
             });
         });
