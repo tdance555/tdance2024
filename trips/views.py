@@ -229,4 +229,7 @@ def function(request):
 def arScan1(request):
     return render(request, 'arScan1.html')
 
+def arScan3(request):
+    return render(request, 'arScan3.html')
+
 

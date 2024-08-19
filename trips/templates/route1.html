@@ -141,74 +141,95 @@
             <h1 class="h1-1">這是條自然氣息濃厚的道路</h1>
             <h2 class="h2-1">請任意選擇「兩個」事件並進行通關</h2>
             <div class="button-container">
-                <button class="iconbt1" data-level="1"></button>
+                <button class="iconbt1" onclick="num1()" data-level="1"></button>
             </div>
             <div class="button-container">
-                <button class="iconbt2" data-level="2"></button>
+                <button class="iconbt2" onclick="num2()" data-level="2"></button>
             </div>
             <div class="button-container">
-                <button class="iconbt3" data-level="3"></button>
+                <button class="iconbt3" onclick="num3()" data-level="3"></button>
             </div>
             <div class="button-container">
-                <button class="iconbt4" data-level="4"></button>
+                <button class="iconbt4" onclick="num4()" data-level="4"></button>
             </div>
             <div class="button-container">
-                <button class="iconbt5" data-level="5"></button>
+                <button class="iconbt5" onclick="num5()" data-level="5"></button>
             </div>
             <div class="button-container">
-                <button class="iconbt18" data-level="18"></button>
+                <button class="iconbt18" onclick="num18()" data-level="18"></button>
             </div>
         </div>
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const buttons = document.querySelectorAll('.button-container button');
-            const phone = getCookie('phone');
-
-            if (phone) {
-                fetch(`/check-records/?phone=${phone}`)
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data.error) {
-                            console.error(data.error);
-                            return;
-                        }
-
-                        buttons.forEach(button => {
-                            const level = button.dataset.level;
-                            const status = data[level]?.status;
-
-                            if (status === 'pass' || status === 'fail') {
-                                button.disabled = true; // 鎖住按鈕
-                                if (status === 'pass') {
-                                    button.classList.add('status-pass');
-                                    console.log("你答對了", response);
-
-                                } else if (status === 'fail') {
-                                    button.classList.add('status-fail');
-                                    console.log("你答錯了", response);
-                                }
-                            }
-                        });
-                    })
-                    .catch(error => console.error('Error fetching records:', error));
-            }
-
-            buttons.forEach(button => {
-                button.addEventListener('click', () => {
-                    const level = button.dataset.level;
-                    document.cookie = `level=${level}; path=/; max-age=${60 * 60 * 24 * 30}`;
-                    window.location.href = "arScan1";
-                });
-            });
-        });
-
-        function getCookie(name) {
-            const value = `; ${document.cookie}`;
-            const parts = value.split(`; ${name}=`);
-            if (parts.length === 2) return parts.pop().split(';').shift();
+        function num1() {
+            document.cookie = "level=" + "1" + "; path=/; max-age=" + (60 * 60 * 24 * 30); // 30天的過期時間
+            window.location.href = "arScan1";
         }
+        function num2() {
+            document.cookie = "level=" + "2" + "; path=/; max-age=" + (60 * 60 * 24 * 30); // 30天的過期時間
+        }
+        function num3() {
+            document.cookie = "level=" + "3" + "; path=/; max-age=" + (60 * 60 * 24 * 30); // 30天的過期時間
+            window.location.href = "arScan3";
+        }
+        function num4() {
+            document.cookie = "level=" + "4" + "; path=/; max-age=" + (60 * 60 * 24 * 30); // 30天的過期時間
+        }
+        function num5() {
+            document.cookie = "level=" + "5" + "; path=/; max-age=" + (60 * 60 * 24 * 30); // 30天的過期時間
+        }
+        function num18() {
+            document.cookie = "level=" + "18" + "; path=/; max-age=" + (60 * 60 * 24 * 30); // 30天的過期時間
+        }
+        // document.addEventListener('DOMContentLoaded', () => {
+        //     const buttons = document.querySelectorAll('.button-container button');
+        //     const phone = getCookie('phone');
+        //     console.log("phone", response);
+
+        //     if (phone) {
+        //         fetch(`/check-records/?phone=${phone}`)
+        //             .then(response => response.json())
+        //             .then(data => {
+        //                 if (data.error) {
+        //                     console.error(data.error);
+        //                     return;
+        //                 }
+
+        //                 buttons.forEach(button => {
+        //                     const level = button.dataset.level;
+        //                     const status = data[level]?.status;
+
+        //                     if (status === 'pass' || status === 'fail') {
+        //                         button.disabled = true; // 鎖住按鈕
+        //                         if (status === 'pass') {
+        //                             button.classList.add('status-pass');
+        //                             console.log("你答對了", response);
+
+        //                         } else if (status === 'fail') {
+        //                             button.classList.add('status-fail');
+        //                             console.log("你答錯了", response);
+        //                         }
+        //                     }
+        //                 });
+        //             })
+        //             .catch(error => console.error('Error fetching records:', error));
+        //     }
+
+        //     buttons.forEach(button => {
+        //         button.addEventListener('click', () => {
+        //             const level = button.dataset.level;
+        //             document.cookie = `level=${level}; path=/; max-age=${60 * 60 * 24 * 30}`;
+        //             window.location.href = "arScan1";
+        //         });
+        //     });
+        // });
+
+        // function getCookie(name) {
+        //     const value = `; ${document.cookie}`;
+        //     const parts = value.split(`; ${name}=`);
+        //     if (parts.length === 2) return parts.pop().split(';').shift();
+        // }
     </script>
 </body>
 </html>
