@@ -67,9 +67,11 @@
 <body>
     <button class="back-button" onclick="window.history.back()"></button>
     <h1></h1>
-    <a-scene mindar-image="imageTargetSrc: ../mind/targets_01.mind; uiError: no; uiLoading: no; uiScanning: no;" color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false">
+    <!-- 修改mind檔案 -->
+    <a-scene mindar-image="imageTargetSrc: ../mind/targets_04.mind; uiError: no; uiLoading: no; uiScanning: no;" color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false">
         <a-assets>
-            <img id="card" src="https://github.com/tdance555/tdance2024/blob/main/trips/img/img_01.png?raw=true" />
+            <!-- 修改圖片 -->
+            <img id="card" src="https://github.com/tdance555/tdance2024/blob/main/trips/img/img_04.png?raw=true" />
             <a-asset-item id="avatarModel" src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.2.5/examples/image-tracking/assets/card-example/softmind/scene.gltf"></a-asset-item>
         </a-assets>
 
@@ -98,8 +100,8 @@
             // 從 cookie 中取得 level
             let num = getCookie('level');
 
-            // let phone = getCookie('phone');  // 這裡取 cookie 的部分已被註解掉
-            let phone = "0945678945"; // 手機號碼被設置為固定值 0945678945
+            let phone = getCookie('phone');  // 這裡取 cookie 的部分已被註解掉
+            // let phone = "0945678945"; // 手機號碼被設置為固定值 0945678945
 
             var mindarEntity = document.querySelector('a-entity[mindar-image-target]');
             mindarEntity.addEventListener('targetFound', function (event) {
@@ -135,9 +137,9 @@
                                 $('.question, .option').remove();
 
                                 if (status === 'pass') {
-                                    $('.result').html('<p>恭喜通關</p><img src="path_to_success_image.png" alt="Success Image"><button onclick="window.history.back()">返回上一頁</button>');
+                                    $('.result').html('<p>恭喜通關</p><img src="path_to_success_image.png" alt="Success Image"><button onclick="window.history.back()">繼續前行</button>');
                                 } else {
-                                    $('.result').html('<p>挑戰失敗</p><img src="path_to_failure_image.png" alt="Failure Image"><button onclick="window.history.back()">返回上一頁</button>');
+                                    $('.result').html('<p>挑戰失敗</p><img src="path_to_failure_image.png" alt="Failure Image"><button onclick="window.history.back()">繼續前行</button>');
                                 }
 
                                 $('.result').fadeIn();

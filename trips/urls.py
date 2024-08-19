@@ -3,6 +3,7 @@ from django.urls import path
 from .views import QuestionDetailAPIView, UserProfileAPIView, PostUpdateAPIView,PostDetailAPIView# ,CheckRecordsAPIView
 from . import views
 urlpatterns = [
+    #各種頁面-------------------------------------------------------------------------------------------------------
     path('', views.index, name='index'),
     path('profile/', views.user_profile, name='user_profile'),  # Profile page URL (e.g., data entry)
     path('profile/manual/', views.manual, name='manual'),  # Manual page URL
@@ -11,9 +12,12 @@ urlpatterns = [
     path('profile/manual/function/road/route1/', views.route1, name='route1'),
     path('profile/manual/function/road/route2/', views.route2, name='route2'),
     path('profile/manual/function/road/route3/', views.route3, name='route3'),
+    #第一梯次路線A(1)--------------------------------------------------------------------------------------------------
     path('profile/manual/function/road/route1/arScan1', views.arScan1, name='arScan1'),
+    path('profile/manual/function/road/route1/arScan2', views.arScan2, name='arScan2'),
     path('profile/manual/function/road/route1/arScan3', views.arScan3, name='arScan3'),
-    
+    path('profile/manual/function/road/route1/arScan4', views.arScan4, name='arScan4'),
+    #api呼叫端點------------------------------------------------------------------------------------------------------
     path('api/user/', UserProfileAPIView.as_view(), name='user-create'),#老師寫的
     path('api/question/<int:question_id>/', QuestionDetailAPIView.as_view(), name='question-detail'),#老師寫的
     path('api/post/<str:phone>/', PostUpdateAPIView.as_view(), name='post-update'),#老師寫的

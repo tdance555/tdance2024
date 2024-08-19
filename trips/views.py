@@ -119,8 +119,6 @@ class PostUpdateAPIView(APIView):
         return Response(content[level], status=status.HTTP_200_OK)
     
 
-def index(request):
-    return render(request, 'index.html')
 
 
 class PostListCreate(generics.ListCreateAPIView):
@@ -191,22 +189,16 @@ class PostDetailAPIView(APIView):
 
 
 
-def profile_success(request, number):
-    question = get_object_or_404(Question, number=number)
-    return render(request, 'profile_success.html', {'question': question})
 
-def get_api(request):
-    return render(request, 'get_api.html')
-# AR_scan前身
-
-
-def ar_scan01(request):
-    return render(request, 'ar_scan01.html')
-
+#各頁面畫面回傳---------------------------------------------------------------------------
+def index(request):
+    return render(request, 'index.html')
 
 def manual(request):
     return render(request, 'manual.html')
 
+def function(request):
+    return render(request, 'function.html')
 
 def road(request):
     return render(request, 'road.html')
@@ -223,13 +215,17 @@ def route2(request):
 def route3(request):
     return render(request, 'route3.html')
 
-def function(request):
-    return render(request, 'function.html')
-
+#AR頁面回傳---------------------------------------------------------------------------------
 def arScan1(request):
     return render(request, 'arScan1.html')
 
+def arScan2(request):
+    return render(request, 'arScan2.html')
+
 def arScan3(request):
     return render(request, 'arScan3.html')
+
+def arScan4(request):
+    return render(request, 'arScan4.html')
 
 
