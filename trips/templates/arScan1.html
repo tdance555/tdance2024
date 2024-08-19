@@ -98,8 +98,8 @@
             // 從 cookie 中取得 level
             let num = getCookie('level');
 
-            // let phone = getCookie('phone');  // 這裡取 cookie 的部分已被註解掉
-            let phone = "0945678945"; // 手機號碼被設置為固定值 0945678945
+            let phone = getCookie('phone');  // 這裡取 cookie 的部分已被註解掉
+            // let phone = "0945678945"; // 手機號碼被設置為固定值 0945678945
 
             var mindarEntity = document.querySelector('a-entity[mindar-image-target]');
             mindarEntity.addEventListener('targetFound', function (event) {
@@ -135,9 +135,9 @@
                                 $('.question, .option').remove();
 
                                 if (status === 'pass') {
-                                    $('.result').html('<p>恭喜通關</p><img src="path_to_success_image.png" alt="Success Image"><button onclick="window.history.back()">返回上一頁</button>');
+                                    $('.result').html('<p>恭喜通關</p><img src="path_to_success_image.png" alt="Success Image">');
                                 } else {
-                                    $('.result').html('<p>挑戰失敗</p><img src="path_to_failure_image.png" alt="Failure Image"><button onclick="window.history.back()">返回上一頁</button>');
+                                    $('.result').html('<p>挑戰失敗</p><img src="path_to_failure_image.png" alt="Failure Image">');
                                 }
 
                                 $('.result').fadeIn();
@@ -155,11 +155,13 @@
                                     }),
                                     success: function (response) {
                                         console.log("資料更新成功:", response);
+                                        
                                     },
                                     error: function (xhr, status, error) {
                                         console.log("Phone:", phone); // 應該打印類似 0945678945 的格式
                                         console.log("Level:", num);   // 應該打印當前的等級
                                         console.error("更新失敗:", xhr.responseText);
+
                                     }
                                 });
                             });
