@@ -38,12 +38,12 @@ class UserProfileAPIView(APIView):
         try:
             user_profile = UserProfile.objects.get(phone=phone)
         except UserProfile.DoesNotExist:
-            return Response({"error": "用户不存在"}, status=status.HTTP_404_NOT_FOUND)
+            return Response({"error": "使用者不存在"}, status=status.HTTP_404_NOT_FOUND)
 
         try:
             post = Post.objects.get(user=user_profile)
         except Post.DoesNotExist:
-            return Response({"error": "用户遊戲歷程不存在"}, status=status.HTTP_404_NOT_FOUND)
+            return Response({"error": "使用者遊戲歷程不存在"}, status=status.HTTP_404_NOT_FOUND)
 
         user_data = UserProfileSerializer(user_profile).data
 
@@ -119,12 +119,6 @@ class PostUpdateAPIView(APIView):
         return Response(content[level], status=status.HTTP_200_OK)
     
 
-
-
-# def hello_world(request):
-#     return HttpResponse("Hello World!")
-
-
 def index(request):
     return render(request, 'index.html')
 
@@ -147,45 +141,59 @@ def user_profile(request):
 
     return render(request, 'user_profile.html', {'form': form})
 
-class PostRetrieveAPIView(APIView):
-    def get(self, request, phone, *args, **kwargs):
+class PostDetailAPIView(APIView):
+
+    def get_object(self, phone):
         try:
+            # 獲取對應的 UserProfile
             user_profile = UserProfile.objects.get(phone=phone)
-            post = Post.objects.get(user=user_profile)
+            # 獲取對應的 Post
+            return Post.objects.get(user=user_profile)
         except UserProfile.DoesNotExist:
-            return Response({"error": "User profile not found"}, status=status.HTTP_404_NOT_FOUND)
+            return None
         except Post.DoesNotExist:
-            return Response({"error": "User post not found"}, status=status.HTTP_404_NOT_FOUND)
-        
-        serializer = PostSerializer(post)
+            return None
+
+    def get(self, request, phone, *args, **kwargs):
+        post_instance = self.get_object(phone)
+        if not post_instance:
+            return Response(
+                {"error": "User post not found"},
+                status=status.HTTP_404_NOT_FOUND
+            )
+        serializer = PostSerializer(post_instance)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
-class CheckRecordsAPIView(APIView):
-    def get(self, request, *args, **kwargs):
-        phone = request.query_params.get('phone')
-        if not phone:
-            return Response({"error": "缺少手機號碼"}, status=status.HTTP_400_BAD_REQUEST)
+# class CheckRecordsAPIView(APIView):
+#     def get(self, request, *args, **kwargs):
+#         phone = request.query_params.get('phone')
+#         if not phone:
+#             return Response({"error": "缺少手機號碼"}, status=status.HTTP_400_BAD_REQUEST)
 
-        try:
-            user_profile = UserProfile.objects.get(phone=phone)
-        except UserProfile.DoesNotExist:
-            return Response({"error": "用户不存在"}, status=status.HTTP_404_NOT_FOUND)
+#         try:
+#             user_profile = UserProfile.objects.get(phone=phone)
+#         except UserProfile.DoesNotExist:
+#             return Response({"error": "使用者不存在"}, status=status.HTTP_404_NOT_FOUND)
 
-        try:
-            post = Post.objects.get(user=user_profile)
-        except Post.DoesNotExist:
-            return Response({"error": "用户遊戲歷程不存在"}, status=status.HTTP_404_NOT_FOUND)
+#         try:
+#             post = Post.objects.get(user=user_profile)#UserProfile對象存在，但Post對象不存在，印出此訊息來確認是否找到了對應的 Post 對象。
+#             print(f"Found Post for user {user_profile.phone}: {post}")
+#         except Post.DoesNotExist:
+#             return Response({"error": "使用者遊戲歷程不存在"}, status=status.HTTP_404_NOT_FOUND)
 
-        user_data = UserProfileSerializer(user_profile).data
-        content = user_data['post']['content']
+#         user_data = UserProfileSerializer(user_profile).data
+#         print(f"Serialized user data: {user_data}")
+#         content = user_data['post']['content']
 
-        response_data = {level: content.get(level, {}) for level in content}
+#         response_data = {level: content.get(level, {}) for level in content}
 
-        return Response(response_data, status=status.HTTP_200_OK)
+#         return Response(response_data, status=status.HTTP_200_OK)
 
-# def profile_success(request, number):
-#     question = get_object_or_404(Question, number=number)
-#     return render(request, 'profile_success.html', {'question': question})
+
+
+def profile_success(request, number):
+    question = get_object_or_404(Question, number=number)
+    return render(request, 'profile_success.html', {'question': question})
 
 def get_api(request):
     return render(request, 'get_api.html')
