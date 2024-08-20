@@ -261,4 +261,78 @@ def arScan3(request):
 def arScan4(request):
     return render(request, 'arScan4.html')
 
+def arScan5(request):
+    return render(request, 'arScan5.html')
+
+def arScan6(request):
+    return render(request, 'arScan6.html')
+
+def arScan7(request):
+    return render(request, 'arScan7.html')
+
+def arScan8(request):
+    return render(request, 'arScan8.html')
+
+def arScan9(request):
+    return render(request, 'arScan9.html')
+
+def arScan10(request):
+    return render(request, 'arScan10.html')
+
+def arScan11(request):
+    return render(request, 'arScan11.html')
+
+def arScan12(request):
+    return render(request, 'arScan12.html')
+
+def arScan13(request):
+    return render(request, 'arScan13.html')
+
+def arScan14(request):
+    return render(request, 'arScan14.html')
+
+def arScan15(request):
+    return render(request, 'arScan15.html')
+
+def arScan16(request):
+    return render(request, 'arScan16.html')
+
+def arScan17(request):
+    return render(request, 'arScan17.html')
+
+def arScan18(request):
+    return render(request, 'arScan18.html')
+
+def arScan19(request):
+    return render(request, 'arScan19.html')
+
+def arScan20(request):
+    return render(request, 'arScan20.html')
+
+def arScan21(request):
+    return render(request, 'arScan21.html')
+
+def arScan22(request):
+    return render(request, 'arScan22.html')
+
+def arScan23(request):
+    return render(request, 'arScan23.html')
+
+def arScan24(request):
+    return render(request, 'arScan24.html')
+
+def arScan25(request):
+    return render(request, 'arScan25.html')
+
+def arScan26(request):
+    return render(request, 'arScan26.html')
+
+def arScan27(request):
+    return render(request, 'arScan27.html')
+
+def arScan28(request):
+    return render(request, 'arScan28.html')
+
+def arScan29(request):
+    return render(request, 'arScan29.html')
 

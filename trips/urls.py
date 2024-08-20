@@ -11,7 +11,13 @@ urlpatterns = [
     path('profile/manual/function/road/route1/', views.route1, name='route1'),  # 添加这一行
     path('profile/manual/function/road/route2/', views.route2, name='route2'),  # 添加这一行
     path('profile/manual/function/road/route3/', views.route3, name='route3'),  # 添加这一行
+    # AR頁面------------------------------------------------------------------------------------
     path('profile/manual/function/road/route1/arScan1', views.arScan1, name='arScan1'),
+    path('profile/manual/function/road/route1/arScan2', views.arScan2, name='arScan2'),
+    path('profile/manual/function/road/route1/arScan3', views.arScan3, name='arScan3'),
+    path('profile/manual/function/road/route1/arScan4', views.arScan4, name='arScan4'),
+    path('profile/manual/function/road/route1/arScan5', views.arScan5, name='arScan5'),
+    path('profile/manual/function/road/route1/arScan18', views.arScan18, name='arScan18'),
     
     # path('get_api/', views.get_api, name='get_api'),
     path('api/user/', UserProfileAPIView.as_view(), name='user-create'),
