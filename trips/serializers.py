@@ -7,7 +7,7 @@ class QuestionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Question
         fields = ['batch', 'title', 'icon', 'question',
-                  'choiceA', 'choiceB', 'choiceC', 'choiceD', 'answer']
+                'choiceA', 'choiceB', 'choiceC', 'choiceD', 'answer']
 
 
 class PostSerializer(serializers.ModelSerializer):

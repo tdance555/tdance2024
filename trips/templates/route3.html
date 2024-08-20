@@ -1,5 +1,3 @@
-<!-- @Author: YI-SYUAN -->
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,156 +9,115 @@
             margin: 0;
             padding: 0;
             font-family: Arial, sans-serif;
-            background-image: url('https://github.com/tdance555/tdance2024/blob/main/media/vendor_icons/WebAR_Background.png?raw=true');  /* 替換為你的背景圖片 URL */
-            background-size: 100% 100%; /* 確保圖片覆蓋整個背景 */
-            background-position: center center; /* 確保圖片居中 */
-            background-repeat: no-repeat; /* 防止圖片重覆 */
+            background-image: url('https://github.com/tdance555/tdance2024/blob/main/media/vendor_icons/%E9%BB%83%E9%BA%B5%E5%8C%85.png?raw=true');
+            background-size: 100% 100%;
+            background-position: center center;
+            background-repeat: no-repeat;
+        }
+
+        .back-button {
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            width: 100px;
+            height: 100px;
+            background-image: url('https://github.com/tdance555/tdance2024/blob/main/media/vendor_icons/%E5%B0%8D%E9%8C%AF%E8%BF%94%E5%9B%9E_%E5%B7%A5%E4%BD%9C%E5%8D%80%E5%9F%9F%201%20%E8%A4%87%E6%9C%AC%204.png?raw=true');
+            background-size: cover;
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            z-index: 1000;
         }
 
         .container {
-            max-width: 100%;
-            margin: 0 auto;
-            padding: 20px;
-            box-sizing: border-box;
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 100vh; /* 確保容器至少占滿整個視口高度 */
-            /*background: rgba(255, 255, 255, 0.8); *//* 半透明白色背景 */
-            flex-wrap:wrap;
+            min-height: 100vh;
+            flex-wrap: wrap;
         }
 
         .content {
-            /* background-color: #ffffff; */
-            padding: 20px;
-            border-radius: 5px;
-            text-align: center;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .button-container {
+            position: relative;
+            margin: 10px;
+            width: 146px;
+            height: 159px;
+        }
+
+        .button-container button {
             width: 100%;
-            max-width: 500px;
-            padding-top: 50px;
-            /*box-shadow: 0 4px 8px rgba(0,0,0,0.1);  輕微陰影效果 */
+            height: 100%;
+            background-color: #FFE153;
+            border: none;
+            border-radius: 15px;
+            border: 5px solid #5A5AAD;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            position: relative;
+            cursor: pointer;
         }
 
-        button{
-            margin: 5px;
+        .button-container button[disabled] {
+            pointer-events: none;
+            opacity: 0.5;
         }
-        .iconbt12{
-            width: 146px;
-            height: 159px;
-            background-color: rgb(41, 64, 42);
-            border: none;
-            color: white;
-            padding: 20px 42px;
-            text-align: center;
-            text-decoration: auto;
-            display: inline-block;
-            font-size: 35px;
-            border-radius: 15px;
-            border: 5px solid white;
+
+        .button-container .iconbt6 {
             background-image: url('https://github.com/tdance555/tdance2024/blob/main/media/vendor_icons/12.png?raw=true');
-            text-align: center;
-            background-size: contain;
-            background-repeat: no-repeat;
         }
-        .iconbt13{
-            width: 146px;
-            height: 159px;
-            background-color: rgb(41, 64, 42);
-            border: none;
-            color: white;
-            padding: 20px 42px;
-            text-align: center;
-            text-decoration: auto;
-            display: inline-block;
-            font-size: 35px;
-            border-radius: 15px;
-            border: 5px solid white;
+        .button-container .iconbt7 {
             background-image: url('https://github.com/tdance555/tdance2024/blob/main/media/vendor_icons/13.png?raw=true');
-            text-align: center;
-            background-size: contain;
-            background-repeat: no-repeat;
         }
-        .iconbt14{
-            width: 146px;
-            height: 159px;
-            background-color: rgb(41, 64, 42);
-            border: none;
-            color: white;
-            padding: 20px 42px;
-            text-align: center;
-            text-decoration: auto;
-            display: inline-block;
-            font-size: 35px;
-            border-radius: 15px;
-            border: 5px solid white;
+        .button-container .iconbt8 {
             background-image: url('https://github.com/tdance555/tdance2024/blob/main/media/vendor_icons/14.png?raw=true');
-            text-align: center;
-            background-size: contain;
-            background-repeat: no-repeat;
         }
-        .iconbt15{
-            width: 146px;
-            height: 159px;
-            background-color: rgb(41, 64, 42);
-            border: none;
-            color: white;
-            padding: 20px 42px;
-            text-align: center;
-            text-decoration: auto;
-            display: inline-block;
-            font-size: 35px;
-            border-radius: 15px;
-            border: 5px solid white;
+        .button-container .iconbt9 {
             background-image: url('https://github.com/tdance555/tdance2024/blob/main/media/vendor_icons/15.png?raw=true');
-            text-align: center;
-            background-size: contain;
-            background-repeat: no-repeat;
         }
-        .iconbt16{
-            width: 146px;
-            height: 159px;
-            background-color: rgb(41, 64, 42);
-            border: none;
-            color: white;
-            padding: 20px 42px;
-            text-align: center;
-            text-decoration: auto;
-            display: inline-block;
-            font-size: 35px;
-            border-radius: 15px;
-            border: 5px solid white;
+        .button-container .iconbt10 {
             background-image: url('https://github.com/tdance555/tdance2024/blob/main/media/vendor_icons/16.png?raw=true');
-            text-align: center;
-            background-size: contain;
-            background-repeat: no-repeat;
         }
-        .iconbt17{
-            width: 146px;
-            height: 159px;
-            background-color: rgb(41, 64, 42);
-            border: none;
-            color: white;
-            padding: 20px 42px;
-            text-align: center;
-            text-decoration: auto;
-            display: inline-block;
-            font-size: 35px;
-            border-radius: 15px;
-            border: 5px solid white;
+        .button-container .iconbt11 {
             background-image: url('https://github.com/tdance555/tdance2024/blob/main/media/vendor_icons/17.png?raw=true');
-            text-align: center;
-            background-size: contain;
-            background-repeat: no-repeat;
         }
 
+        .status-pass {
+            background-image: url('https://path/to/pass-image.png');
+            background-size: 50px 50px;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+
+        .status-fail {
+            background-image: url('https://path/to/fail-image.png');
+            background-size: 50px 50px;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+
+        h1 {
+
+            margin-top: -10px;
+            font-size: 20px;
+        }
+
+        h2 {
+
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
 
         @media (min-width: 320px) and (max-width: 480px) {
             .container {
                 padding: 10px;
-            }
-
-            .content {
-                font-size: 14px;
             }
         }
 
@@ -168,56 +125,113 @@
             .container {
                 padding: 15px;
             }
-
-            .content {
-                font-size: 16px;
-            }
         }
 
         @media (min-width: 768px) {
             .container {
                 padding: 20px;
             }
-
-            .content {
-                font-size: 18px;
-            }
         }
-
     </style>
 </head>
 <body>
+    <button class="back-button" onclick="window.history.back()"></button>
     <div class="container">
         <div class="content">
-            <button class="iconbt12" onclick="num12()"></button>
-            <button class="iconbt13" onclick="num7()"></button>
-            <button class="iconbt14" onclick="num14()"></button>
-            <button class="iconbt15" onclick="num15()"></button>
-            <button class="iconbt16" onclick="num16()"></button>
-            <button class="iconbt17" onclick="num17()"></button>
+            <h1>這是條多元文化的探索之旅</h1>
+            <h1>沿途的層層祕境等你來破解</h1>
+            <h2 class="h2Row2">請任意選擇「兩個」事件並進行通關</h2>
+            <div class="button-container">
+                <button class="iconbt6" onclick="num6()" data-level="6"></button>
+            </div>
+            <div class="button-container">
+                <button class="iconbt7" onclick="num7()" data-level="7"></button>
+            </div>
+            <div class="button-container">
+                <button class="iconbt8" onclick="num8()" data-level="8"></button>
+            </div>
+            <div class="button-container">
+                <button class="iconbt9" onclick="num9()" data-level="9"></button>
+            </div>
+            <div class="button-container">
+                <button class="iconbt10" onclick="num10()" data-level="10"></button>
+            </div>
+            <div class="button-container">
+                <button class="iconbt11" onclick="num11()" data-level="11"></button>
+            </div>
         </div>
     </div>
 
     <script>
-        function num12() {
-            document.cookie = "level=" + "12" + "; path=/; max-age=" + (60 * 60 * 24 * 30); // 30天的過期時間
+        function num6() {
+            document.cookie = "level=" + "6" + "; path=/; max-age=" + (60 * 60 * 24 * 30); // 30天的過期時間
+            window.location.href = "arScan1";
         }
-        function num13() {
-            document.cookie = "level=" + "13" + "; path=/; max-age=" + (60 * 60 * 24 * 30); // 30天的過期時間
+        function num7() {
+            document.cookie = "level=" + "7" + "; path=/; max-age=" + (60 * 60 * 24 * 30); // 30天的過期時間
+            window.location.href = "arScan2";
         }
-        function num14() {
-            document.cookie = "level=" + "14" + "; path=/; max-age=" + (60 * 60 * 24 * 30); // 30天的過期時間
+        function num8() {
+            document.cookie = "level=" + "8" + "; path=/; max-age=" + (60 * 60 * 24 * 30); // 30天的過期時間
+            window.location.href = "arScan3";
         }
-        function num15() {
-            document.cookie = "level=" + "15" + "; path=/; max-age=" + (60 * 60 * 24 * 30); // 30天的過期時間
+        function num9() {
+            document.cookie = "level=" + "9" + "; path=/; max-age=" + (60 * 60 * 24 * 30); // 30天的過期時間
         }
-        function num16() {
-            document.cookie = "level=" + "16" + "; path=/; max-age=" + (60 * 60 * 24 * 30); // 30天的過期時間
+        function num10() {
+            document.cookie = "level=" + "10" + "; path=/; max-age=" + (60 * 60 * 24 * 30); // 30天的過期時間
         }
-        function num17() {
-            document.cookie = "level=" + "17" + "; path=/; max-age=" + (60 * 60 * 24 * 30); // 30天的過期時間
+        function num11() {
+            document.cookie = "level=" + "11" + "; path=/; max-age=" + (60 * 60 * 24 * 30); // 30天的過期時間
         }
+        // document.addEventListener('DOMContentLoaded', () => {
+        //     const buttons = document.querySelectorAll('.button-container button');
+        //     const phone = getCookie('phone');
+        //     console.log("phone", response);
+
+        //     if (phone) {
+        //         fetch(`/check-records/?phone=${phone}`)
+        //             .then(response => response.json())
+        //             .then(data => {
+        //                 if (data.error) {
+        //                     console.error(data.error);
+        //                     return;
+        //                 }
+
+        //                 buttons.forEach(button => {
+        //                     const level = button.dataset.level;
+        //                     const status = data[level]?.status;
+
+        //                     if (status === 'pass' || status === 'fail') {
+        //                         button.disabled = true; // 鎖住按鈕
+        //                         if (status === 'pass') {
+        //                             button.classList.add('status-pass');
+        //                             console.log("你答對了", response);
+
+        //                         } else if (status === 'fail') {
+        //                             button.classList.add('status-fail');
+        //                             console.log("你答錯了", response);
+        //                         }
+        //                     }
+        //                 });
+        //             })
+        //             .catch(error => console.error('Error fetching records:', error));
+        //     }
+
+        //     buttons.forEach(button => {
+        //         button.addEventListener('click', () => {
+        //             const level = button.dataset.level;
+        //             document.cookie = `level=${level}; path=/; max-age=${60 * 60 * 24 * 30}`;
+        //             window.location.href = "arScan1";
+        //         });
+        //     });
+        // });
+
+        // function getCookie(name) {
+        //     const value = `; ${document.cookie}`;
+        //     const parts = value.split(`; ${name}=`);
+        //     if (parts.length === 2) return parts.pop().split(';').shift();
+        // }
     </script>
 </body>
 </html>
-

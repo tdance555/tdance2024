@@ -1,5 +1,6 @@
 from django.db import models
-
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 # Create your models here.
 def default_content():
     content = {}
@@ -35,7 +36,7 @@ class UserProfile(models.Model):
         ('O', '其他'),
     ]
 
-    phone = models.CharField(max_length=15, primary_key=True)
+    phone = models.CharField(max_length=15, unique=True ,primary_key=True)
     gender = models.CharField(max_length=1, choices=GENDER_CHOICES)
 
     def __str__(self):
@@ -49,6 +50,12 @@ class Post(models.Model):
 
     def __str__(self):
         return f"Post by {self.user.phone} at {self.created_at}"
+
+# 使用信号量在 UserProfile 保存后自动创建 Post 实例
+@receiver(post_save, sender=UserProfile)
+def create_post(sender, instance, created, **kwargs):
+    if created:  # 如果是创建的新实例
+        Post.objects.create(user=instance)
 # class Post1(models.Model):
 #     number = models.PositiveIntegerField()
 #     title = models.CharField(max_length=100)
