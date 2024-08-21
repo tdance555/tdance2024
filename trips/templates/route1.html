@@ -186,7 +186,7 @@
             const phone = getCookie('phone');
             
             if (phone) {
-                fetch(`http://127.0.0.1:8000/trips/api/post-detail/${phone}/`)
+                fetch(`https://tdance.fansee.studio/trips/api/post-detail/${phone}/`)
                     .then(response => response.json())
                     .then(data => {
                         const levels = [1, 2, 3, 4, 5, 18];
