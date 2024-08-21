@@ -9,7 +9,7 @@
             margin: 0;
             padding: 0;
             font-family: Arial, sans-serif;
-            background-image: url('https://github.com/tdance555/tdance2024/blob/main/media/vendor_icons/%E9%BB%83%E9%BA%B5%E5%8C%85.png?raw=true');
+            background-image: url('https://github.com/tdance555/tdance2024/blob/main/media/vendor_icons/%E9%BB%83%E9%BA%B5%E5%8C%85.png?raw=true'); 
             background-size: 100% 100%;
             background-position: center center;
             background-repeat: no-repeat;
@@ -54,10 +54,10 @@
         .button-container button {
             width: 100%;
             height: 100%;
-            background-color: #6FB7B7;
+            background-color: #4F74AB;
             border: none;
             border-radius: 15px;
-            border: 5px solid #FFC78E;
+            border: 5px solid #EAD73B;
             background-size: contain;
             background-repeat: no-repeat;
             background-position: center;
@@ -89,30 +89,38 @@
             background-image: url('https://github.com/tdance555/tdance2024/blob/main/media/vendor_icons/11.png?raw=true');
         }
 
-        .status-pass {
-            background-image: url('https://path/to/pass-image.png');
-            background-size: 50px 50px;
+        .status-pass,
+        .status-fail {
+            position: absolute;
+            top: 50%; /* 中心位置 */
+            left: 50%;
+            transform: translate(-50%, -50%); /* 居中 */
+            width: 100px;
+            height: 100px;
+            background-size: cover;
             background-repeat: no-repeat;
             background-position: center;
+            display: none;
+        }
+
+        .status-pass {
+            background-image: url('https://github.com/tdance555/tdance2024/blob/main/media/vendor_icons/correct.png?raw=true');
         }
 
         .status-fail {
-            background-image: url('https://path/to/fail-image.png');
-            background-size: 50px 50px;
-            background-repeat: no-repeat;
-            background-position: center;
+            background-image: url('https://github.com/tdance555/tdance2024/blob/main/media/vendor_icons/wrong.png?raw=true');
         }
 
-        h1 {
-
-            margin-top: -10px;
+        h1, h2 {
+            text-align: center;
+            color: #333;
+        }
+        
+        .h1-1 {
+            font-size: 23px;
+        }
+        .h2-1 {
             font-size: 20px;
-        }
-
-        h2 {
-
-            font-size: 18px;
-            margin-bottom: 20px;
         }
 
         @media (min-width: 320px) and (max-width: 480px) {
@@ -138,100 +146,99 @@
     <button class="back-button" onclick="window.history.back()"></button>
     <div class="container">
         <div class="content">
-            <h1>這是條刺激五感享受的冒險</h1>
-            <h1>路上有未知體驗等你來挑戰</h1>
-            <h2 class="h2Row2">請任意選擇「兩個」事件並進行通關</h2>
+            <h1 class="h1-1">這是條刺激五感享受的冒險
+                路上有未知體驗等你來挑戰</h1>
+            <h2 class="h2-1">請任意選擇「兩個」事件並進行通關</h2>
             <div class="button-container">
-                <button class="iconbt6" onclick="num6()" data-level="6"></button>
+                <button class="iconbt6" data-level="6"></button>
+                <div class="status-pass" id="status6"></div>
+                <div class="status-fail" id="fail6"></div>
             </div>
             <div class="button-container">
-                <button class="iconbt7" onclick="num7()" data-level="7"></button>
+                <button class="iconbt7" data-level="7"></button>
+                <div class="status-pass" id="status7"></div>
+                <div class="status-fail" id="fail7"></div>
             </div>
             <div class="button-container">
-                <button class="iconbt8" onclick="num8()" data-level="8"></button>
+                <button class="iconbt8" data-level="8"></button>
+                <div class="status-pass" id="status8"></div>
+                <div class="status-fail" id="fail8"></div>
             </div>
             <div class="button-container">
-                <button class="iconbt9" onclick="num9()" data-level="9"></button>
+                <button class="iconbt9" data-level="9"></button>
+                <div class="status-pass" id="status9"></div>
+                <div class="status-fail" id="fail9"></div>
             </div>
             <div class="button-container">
-                <button class="iconbt10" onclick="num10()" data-level="10"></button>
+                <button class="iconbt10" data-level="10"></button>
+                <div class="status-pass" id="status10"></div>
+                <div class="status-fail" id="fail10"></div>
             </div>
             <div class="button-container">
-                <button class="iconbt11" onclick="num11()" data-level="11"></button>
+                <button class="iconbt11" data-level="11"></button>
+                <div class="status-pass" id="status11"></div>
+                <div class="status-fail" id="fail11"></div>
             </div>
         </div>
     </div>
 
     <script>
-        function num6() {
-            document.cookie = "level=" + "6" + "; path=/; max-age=" + (60 * 60 * 24 * 30); // 30天的過期時間
-            window.location.href = "arScan1";
-        }
-        function num7() {
-            document.cookie = "level=" + "7" + "; path=/; max-age=" + (60 * 60 * 24 * 30); // 30天的過期時間
-            window.location.href = "arScan2";
-        }
-        function num8() {
-            document.cookie = "level=" + "8" + "; path=/; max-age=" + (60 * 60 * 24 * 30); // 30天的過期時間
-            window.location.href = "arScan3";
-        }
-        function num9() {
-            document.cookie = "level=" + "9" + "; path=/; max-age=" + (60 * 60 * 24 * 30); // 30天的過期時間
-        }
-        function num10() {
-            document.cookie = "level=" + "10" + "; path=/; max-age=" + (60 * 60 * 24 * 30); // 30天的過期時間
-        }
-        function num11() {
-            document.cookie = "level=" + "11" + "; path=/; max-age=" + (60 * 60 * 24 * 30); // 30天的過期時間
-        }
-        // document.addEventListener('DOMContentLoaded', () => {
-        //     const buttons = document.querySelectorAll('.button-container button');
-        //     const phone = getCookie('phone');
-        //     console.log("phone", response);
+        document.addEventListener('DOMContentLoaded', function() {
+            const phone = getCookie('phone');
+            
+            if (phone) {
+                fetch(`http://127.0.0.1:8000/trips/api/post-detail/${phone}/`)
+                    .then(response => response.json())
+                    .then(data => {
+                        const levels = [6, 7, 8, 9, 10, 11];
 
-        //     if (phone) {
-        //         fetch(`/check-records/?phone=${phone}`)
-        //             .then(response => response.json())
-        //             .then(data => {
-        //                 if (data.error) {
-        //                     console.error(data.error);
-        //                     return;
-        //                 }
+                        levels.forEach(level => {
+                            const statusPassElement = document.getElementById(`status${level}`);
+                            const statusFailElement = document.getElementById(`fail${level}`);
+                            const button = document.querySelector(`button[data-level="${level}"]`);
+                            
+                            const status = data.content[level.toString()]?.status;
+                            if (status === 'pass') {
+                                button.disabled = true;
+                                statusPassElement.style.display = 'block';
+                            } else if (status === 'fail') {
+                                button.disabled = true;
+                                statusFailElement.style.display = 'block';
+                            }
+                        });
+                    })
+                    .catch(error => {
+                        console.error('Error fetching post details', error);
+                    });
+            }
+        });
 
-        //                 buttons.forEach(button => {
-        //                     const level = button.dataset.level;
-        //                     const status = data[level]?.status;
+        function getCookie(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                const cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].trim();
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
 
-        //                     if (status === 'pass' || status === 'fail') {
-        //                         button.disabled = true; // 鎖住按鈕
-        //                         if (status === 'pass') {
-        //                             button.classList.add('status-pass');
-        //                             console.log("你答對了", response);
+        function handleButtonClick(level) {
+            document.cookie = `level=${level}; path=/; max-age=${60 * 60 * 24 * 30}`; // 30 days
+            window.location.href = `arScan${level}`;
+        }
 
-        //                         } else if (status === 'fail') {
-        //                             button.classList.add('status-fail');
-        //                             console.log("你答錯了", response);
-        //                         }
-        //                     }
-        //                 });
-        //             })
-        //             .catch(error => console.error('Error fetching records:', error));
-        //     }
-
-        //     buttons.forEach(button => {
-        //         button.addEventListener('click', () => {
-        //             const level = button.dataset.level;
-        //             document.cookie = `level=${level}; path=/; max-age=${60 * 60 * 24 * 30}`;
-        //             window.location.href = "arScan1";
-        //         });
-        //     });
-        // });
-
-        // function getCookie(name) {
-        //     const value = `; ${document.cookie}`;
-        //     const parts = value.split(`; ${name}=`);
-        //     if (parts.length === 2) return parts.pop().split(';').shift();
-        // }
+        document.querySelectorAll('.button-container button').forEach(button => {
+            button.addEventListener('click', function() {
+                const level = this.dataset.level;
+                handleButtonClick(level);
+            });
+        });
     </script>
 </body>
 </html>
