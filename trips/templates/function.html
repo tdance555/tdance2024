@@ -162,7 +162,7 @@
             <h2>這裡是您休憩的地點</h2>
             <h2 class="h2Row2">您可以隨時回來並選擇你想做的事</h2>
             <button onclick="ToGamePage()" class="buttonStart">選擇旅遊路線</button>
-            <button onclick="ToTeachPage()" class="buttonOther">如何遊玩遊戲</button>
+            <button onclick="toTeach()" class="buttonOther">如何遊玩遊戲</button>
             <button onclick="openModal('mapModal')" class="buttonOther">查詢活動地圖</button>
             <button onclick="openModal('aboutModal')" class="buttonOther">關於本次活動</button>
         </div>
@@ -201,6 +201,9 @@
             document.getElementById(modalId).style.display = "none";
         }
 
+        function toTeach(){
+            window.location.href = "teach";
+        }
         window.onclick = function (event) {
             if (event.target.classList.contains('modal')) {
                 event.target.style.display = "none";
