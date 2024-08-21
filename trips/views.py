@@ -248,6 +248,9 @@ def route2(request):
 def route3(request):
     return render(request, 'route3.html')
 
+def teach(request):
+    return render(request, 'teach.html')
+
 #AR頁面回傳---------------------------------------------------------------------------------
 def arScan1(request):
     return render(request, 'arScan1.html')
