@@ -1,16 +1,4 @@
-<!-- @Author: YI-SYUAN -->
-<!-- 網頁遊戲主頁 -->
-<!-- 已完成:1.跳轉、2.返回 -->
-<!-- 待完成:1.畫面設計 -->
-
 <!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AR遊戲集點</title>
-    <!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -31,13 +19,11 @@
         .container {
             max-width: 100%;
             margin: 0 auto;
-            /* padding: 20px; */
             box-sizing: border-box;
             display: flex;
             justify-content: center;
             align-items:center;
             min-height: 100vh;
-            /* border: red solid 5px; */
         }
 
         .back-button {
@@ -56,65 +42,22 @@
         }
 
         .content {
-            /* background-color:blueviolet; */
-            /* border: black solid 10px; */
             border-radius: 5px;
             text-align: center;
-            /* height: 700px; */
-            /* max-width: 375px; */
-            /* padding-bottom: 100px; */
             padding-top: -50px;
-            /* border: red solid 5px; */
-        }
-
-        .button1, .button2, .button3 {
-            width: 125px;
-            height: 125px;
-            background-color: #ffffff;
-            border: none;
-            color: white;
-            padding: 20px 42px;
-            text-align: center;
-            display: block;
-            font-size: 35px;
-            border-radius: 15px;
-            border: 5px solid #EAD73B;
-            background-size: contain;
-            background-repeat: no-repeat;
-            margin: 10px auto;
-        }
-
-        .button1 {
-            background-image: url('https://github.com/tdance555/tdance2024/blob/main/media/vendor_icons/button_1.png?raw=true');
-        }
-
-        .button2 {
-            background-image: url('https://github.com/tdance555/tdance2024/blob/main/media/vendor_icons/button_2.png?raw=true');
-        }
-
-        .button3 {
-            background-image: url('https://github.com/tdance555/tdance2024/blob/main/media/vendor_icons/button_3.png?raw=true');
         }
 
         h1 {
-            /* align-self:auto; */
             font-size: 30px;
-            color: #000000;
+            color: #ffffff;
             font-weight: bold;
             margin-top: 100px;
-            /* padding-top: 100px; */
-            /* border: red solid 5px; */
-            /* width: 150px;
-            height: 50px; */
-        }
-
-        .t1{
-            border: #ffffff solid 5px;
-            border-radius: 10px;
-            color: #ffffff;
-            background-color:cadetblue ;
-            width: 150px;
-            height: 60px;
+            border: 2px solid #ffffff; /* 加上邊框 */
+            padding: 10px;
+            text-align: center; /* 文字水平置中 */
+            display: inline-block; /* 讓邊框根據內容寬度自動調整 */
+            border-radius: 15px;
+            background-color: cadetblue;
         }
 
         h2 {
@@ -122,9 +65,10 @@
             margin-bottom: 100px;
         }
 
-        img{
+        img {
             width: 336px;
             height: 729px;
+            margin-bottom: 20px;
         }
 
         @media (min-width: 320px) and (max-width: 480px) {
@@ -169,24 +113,8 @@
             <img src="https://github.com/tdance555/tdance2024/blob/beforeFinish/media/vendor_icons/T3.png?raw=true" alt="第三步">
             <img src="https://github.com/tdance555/tdance2024/blob/beforeFinish/media/vendor_icons/T4.png?raw=true" alt="第四步">
             <img src="https://github.com/tdance555/tdance2024/blob/beforeFinish/media/vendor_icons/T5.png?raw=true" alt="第五步">
-
-            <!-- <button onclick="Toroute1Page()" class="button1"></button>
-            <button onclick="Toroute2Page()" class="button2"></button>
-            <button onclick="Toroute3Page()" class="button3"></button> -->
         </div>
     </div>
-
-    <script>
-        // function Toroute1Page() {
-        //     window.location.href = "route1";
-        // }
-        // function Toroute2Page() {
-        //     window.location.href = "route2";
-        // }
-        // function Toroute3Page() {
-        //     window.location.href = "route3";
-        // }
-    </script>
 </body>
 
 </html>
