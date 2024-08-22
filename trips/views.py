@@ -236,17 +236,26 @@ def function(request):
 def road(request):
     return render(request, 'road.html')
 
+def road2(request):
+    return render(request, 'road2.html')
 
 def route1(request):
     return render(request, 'route1.html')
 
-
 def route2(request):
     return render(request, 'route2.html')
 
-
 def route3(request):
     return render(request, 'route3.html')
+
+def route4(request):
+    return render(request, 'route4.html')
+
+def route5(request):
+    return render(request, 'route5.html')
+
+def route6(request):
+    return render(request, 'route6.html')
 
 def teach(request):
     return render(request, 'teach.html')
