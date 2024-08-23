@@ -53,9 +53,9 @@ class Post(models.Model):
 
 # 使用信号量在 UserProfile 保存后自动创建 Post 实例
 @receiver(post_save, sender=UserProfile)
-def create_post(sender, instance, created, **kwargs):
-    if created:  # 如果是创建的新实例
-        Post.objects.create(user=instance)
+def create_user_post(sender, instance, created, **kwargs):
+    if created:
+        Post.objects.get_or_create(user=instance)
 # class Post1(models.Model):
 #     number = models.PositiveIntegerField()
 #     title = models.CharField(max_length=100)

@@ -68,6 +68,7 @@ class UserProfileAPIView(APIView):
         serializer = UserProfileSerializer(data=request.data)
         if serializer.is_valid():
             user_profile = serializer.save()
+            Post.objects.get_or_create(user=user_profile)
             return Response(UserProfileSerializer(user_profile).data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
@@ -117,7 +118,7 @@ class PostUpdateAPIView(APIView):
         post.save()
 
         return Response(content[level], status=status.HTTP_200_OK)
-    
+
 
 
 
@@ -164,7 +165,7 @@ class PostDetailAPIView(APIView):
                 {"error": "User post not found"},
                 status=status.HTTP_404_NOT_FOUND
             )
-        
+
         # Extract the content dictionary from the Post instance
         content = post_instance.content
 
@@ -176,9 +177,9 @@ class PostDetailAPIView(APIView):
                 } for key, value in content.items()
             }
         }
-        
+
         return Response(response_data, status=status.HTTP_200_OK)
-    
+
 # class CheckStatusAPIView(APIView):
 #     def get(self, request, phone):
 #         level = request.GET.get('level')
@@ -192,9 +193,9 @@ class PostDetailAPIView(APIView):
 
 #         content = post.content
 #         level_status = content.get(level, {}).get('status', 'null')
-        
+
 #         return JsonResponse({'status': level_status})
-    
+
 # class CheckRecordsAPIView(APIView):
 #     def get(self, request, *args, **kwargs):
 #         phone = request.query_params.get('phone')
