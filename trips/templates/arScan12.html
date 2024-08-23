@@ -84,7 +84,7 @@
     <a-scene mindar-image="imageTargetSrc: ../mind/targets_12.mind; uiError: no; uiLoading: no; uiScanning: no;" color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false">
         <a-assets>
             <!-- 換圖片 -->
-            <img id="card" src="https://github.com/tdance555/tdance2024/blob/main/trips/img/img_12.png?raw=true" />
+            <img id="card" src="https://github.com/tdance555/tdance2024/blob/beforefinish/trips/img/img_12.png?raw=true" />
             <a-asset-item id="avatarModel" src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.2.5/examples/image-tracking/assets/card-example/softmind/scene.gltf"></a-asset-item>
         </a-assets>
 
@@ -116,7 +116,7 @@
             // 換關卡編號
             let level ="12";
             let phone = getCookie('phone');
-            let mainurl = "http://127.0.0.1:8000/trips/api/post-detail/";
+            let mainurl = "https://tdance.fansee.studio/trips/api/post-detail/";
 
             // 事件：檢測到目標
             var mindarEntity = document.querySelector('a-entity[mindar-image-target]');
@@ -139,7 +139,7 @@
                             } else {
                                 // 如果是null，則顯示問題和選項
                                 $.ajax({
-                                    url: "http://127.0.0.1:8000/trips/api/question/" + level,
+                                    url: "https://tdance.fansee.studio/trips/api/question/" + level,
                                     type: "GET",
                                     dataType: "json",
                                     success: function (Question) {
@@ -171,7 +171,7 @@
 
                                             // 發送 PATCH 請求更新數據
                                             $.ajax({
-                                                url: `http://127.0.0.1:8000/trips/api/post/${phone}/`,
+                                                url: `https://tdance.fansee.studio/trips/api/post/${phone}/`,
                                                 type: "PATCH",
                                                 contentType: "application/json",
                                                 data: JSON.stringify({
