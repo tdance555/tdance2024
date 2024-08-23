@@ -7,7 +7,7 @@ class QuestionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Question
         fields = ['batch', 'title', 'icon', 'question',
-                'choiceA', 'choiceB', 'choiceC', 'choiceD', 'answer']
+                  'choiceA', 'choiceB', 'choiceC', 'choiceD', 'answer']
 
 
 class PostSerializer(serializers.ModelSerializer):
@@ -25,6 +25,7 @@ class UserProfileSerializer(serializers.ModelSerializer):
         fields = ['phone', 'gender', 'post']
 
     def create(self, validated_data):
+        # 在創建 UserProfile 的同時創建一個關聯的 Post
         user_profile = UserProfile.objects.create(**validated_data)
         Post.objects.create(user=user_profile)
         return user_profile
