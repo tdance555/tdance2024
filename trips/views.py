@@ -132,7 +132,7 @@ class PostDetailAPIView(APIView):
         post_instance = self.get_object(phone)
         if not post_instance:
             return Response(
-                {"error": "用户或帖子不存在"},
+                {"error": "用户不存在"},
                 status=status.HTTP_404_NOT_FOUND
             )
 
