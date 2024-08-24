@@ -1,4 +1,6 @@
 from django.db import models
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
 # Create your models here.
 def default_content():
@@ -49,3 +51,9 @@ class Post(models.Model):
 
     def __str__(self):
         return f"Post by {self.user.phone} at {self.created_at}"
+
+
+@receiver(post_save, sender=UserProfile)
+def create_user_post(sender, instance, created, **kwargs):
+    if created:
+        Post.objects.create(user=instance)

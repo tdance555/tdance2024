@@ -29,3 +29,16 @@ class UserProfileSerializer(serializers.ModelSerializer):
         user_profile = UserProfile.objects.create(**validated_data)
         Post.objects.create(user=user_profile)
         return user_profile
+
+    def update(self, instance, validated_data):
+           instance.phone = validated_data.get('phone', instance.phone)
+           instance.gender = validated_data.get('gender', instance.gender)
+           instance.save()
+
+           post_data = validated_data.get('post')
+           if post_data:
+               post_serializer = PostSerializer(instance.post, data=post_data, partial=True)
+               if post_serializer.is_valid():
+                   post_serializer.save()
+
+           return instance

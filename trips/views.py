@@ -119,28 +119,22 @@ class PostListCreate(generics.ListCreateAPIView):
 
 
 class PostDetailAPIView(APIView):
-
     def get_object(self, phone):
         try:
-            post, created = Post.objects.get_or_create(phone=phone)
-            if created:
-                # 如果是新創建的 Post，初始化所有關卡的狀態為 null
-                levels = [str(i) for i in range(1, 30)]  # 假設有 29 關
-                post.content = {level: {'status': 'null', 'user_answer': '', 'correct_answer': ''} for level in levels}
-                post.save()
-            return post
-        except Exception as e:
-            print(f"get_object 錯誤: {e}")
+            user_profile = UserProfile.objects.get(phone=phone)
+            return user_profile.post
+        except UserProfile.DoesNotExist:
+            return None
+        except Post.DoesNotExist:
             return None
 
     def get(self, request, phone, *args, **kwargs):
         post_instance = self.get_object(phone)
         if not post_instance:
             return Response(
-                {"error": "創建或獲取資料失敗"},
-                status=status.HTTP_500_INTERNAL_SERVER_ERROR
+                {"error": "用户或帖子不存在"},
+                status=status.HTTP_404_NOT_FOUND
             )
 
-        # 使用序列化器返回資料
         serializer = PostSerializer(post_instance)
         return Response(serializer.data, status=status.HTTP_200_OK)
